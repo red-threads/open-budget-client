@@ -1,0 +1,62 @@
+{
+  "name": "@red-threads/open-budget-client",
+  "version": "0.0.1",
+  "description": "Open Budget WebClient",
+  "main": "pages/index.js",
+  "engines": {
+    "node": "10.x.x",
+    "npm": "6.x.x"
+  },
+  "scripts": {
+    "jest": "NODE_ENV=test jest",
+    "lint": "standard --fix",
+    "test": "run-p lint jest",
+    "dev": "node -r dotenv/config node_modules/.bin/next",
+    "build": "next build",
+    "start": "next start",
+    "push-tags": "git push --follow-tags origin master",
+    "deploy": "now --public && now alias && now rm @red-threads/open-budget-client -sy",
+    "prerelease": "npm run lint",
+    "release": "standard-version",
+    "postrelease": "run-p push-tags deploy"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/red-threads/open-budget-client.git"
+  },
+  "keywords": [
+    "red-threads",
+    "openbudget",
+    "collective",
+    "nonprofit"
+  ],
+  "author": "Red Threads",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/red-threads/open-budget-client/issues"
+  },
+  "homepage": "https://github.com/red-threads/open-budget-client#readme",
+  "dependencies": {
+    "devour-client": "^2.0.12",
+    "dotenv": "^6.0.0",
+    "next": "^6.0.3",
+    "npm-run-all": "^4.1.3",
+    "pluralize": "^7.0.0",
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1",
+    "rollbar": "^2.4.1"
+  },
+  "devDependencies": {
+    "jest": "^23.1.0",
+    "now": "^11.2.4",
+    "standard": "^11.0.1",
+    "standard-version": "^4.4.0"
+  },
+  "now": {
+    "alias": "open-budget",
+    "env": {
+      "ROLLBAR_TOKEN": "@rollbar-token",
+      "NODE_ENV": "production"
+    }
+  }
+}
