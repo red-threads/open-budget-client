@@ -8,7 +8,7 @@ export default class extends React.Component {
   static async getInitialProps ({ req }) {
     setModel()
     return jsonApi.findAll(entity, {
-      include: cardEntity + 's'
+      include: cardEntity
     })
   }
 
