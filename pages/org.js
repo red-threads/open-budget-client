@@ -1,14 +1,18 @@
 import React from 'react'
-import jsonApi from '../src/api'
+import { findOneOrAll } from '../src/api'
 
 import { entity as cardEntity } from '../src/models/card'
 import { setModel, entity } from '../src/models/org'
 
 export default class extends React.Component {
-  static async getInitialProps ({ req }) {
+  static async getInitialProps ({ query: { id } }) {
     setModel()
-    return jsonApi.findAll(entity, {
-      include: cardEntity
+    return findOneOrAll({
+      entity,
+      id,
+      options: {
+        include: cardEntity
+      }
     })
   }
 
