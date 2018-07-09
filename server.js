@@ -5,7 +5,10 @@ const next = require('next')
 const pathMatch = require('path-match')
 
 const crudRoutes = [
-  'org'
+  'organization',
+  'card',
+  'transaction',
+  'transaction-type'
 ]
 const port = parseInt(process.env.PORT, 10) || 3000
 const dev = process.env.NODE_ENV !== 'production'
@@ -17,16 +20,17 @@ app.prepare()
   .then(() => {
     createServer((req, res) => {
       const { pathname, query } = parse(req.url, true)
-      const getPage = route('/:route/:id')(pathname)
-      if (getPage && crudRoutes.includes(getPage.route)) {
-        app.render(req, res, `/${getPage.route}`, Object.assign(getPage, query))
+      const createPage = route('/:entity/new')(pathname)
+      const editPage = route('/:entity/:id/edit')(pathname)
+      const getPage = route('/:entity/:id')(pathname)
+      const createOrEditPage = createPage || editPage
+
+      if (createOrEditPage && crudRoutes.includes(createOrEditPage.entity)) {
+        app.render(req, res, `/edit`, Object.assign(createOrEditPage, query))
         return
       }
-      const createPage = route('/:route/new')(pathname)
-      const editPage = route('/:route/edit/:id')(pathname)
-      const createOrEditPage = createPage || editPage
-      if (createOrEditPage && crudRoutes.includes(createOrEditPage.route)) {
-        app.render(req, res, `/${createOrEditPage.route}-edit`, Object.assign(createOrEditPage, query))
+      if (getPage && crudRoutes.includes(getPage.entity)) {
+        app.render(req, res, `/${getPage.entity}`, Object.assign(getPage, query))
         return
       }
 

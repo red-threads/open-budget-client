@@ -1,15 +1,11 @@
-import jsonApi from '../api'
+import { schema } from '@red-threads/open-budget-api/src/transaction-type/schema'
 
-export const entity = 'transaction-type'
+import jsonApi from '../api'
+import { default as convertSchema } from '../converters/to-devour-model'
+
+export const { name, fields } = convertSchema(schema)
+export const entity = name
 
 export function setModel () {
-  jsonApi.define(entity, {
-    createdAt: null,
-    updatedAt: null,
-    type: '',
-    value: '',
-    note: '',
-    fromCountry: '',
-    toCountry: ''
-  })
+  jsonApi.define(name, fields)
 }
