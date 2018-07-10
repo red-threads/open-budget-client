@@ -1,20 +1,11 @@
 import Debug from 'debug'
+import camelCase from 'lodash.camelcase'
 import { addLast, set } from 'timm'
 
-import { schema as cardSchema } from '@red-threads/open-budget-api/src/card/schema'
-import { schema as orgSchema } from '@red-threads/open-budget-api/src/organization/schema'
-import { schema as transactionSchema } from '@red-threads/open-budget-api/src/transaction/schema'
-import { schema as transactionTypeSchema } from '@red-threads/open-budget-api/src/transaction-type/schema'
-
 import { fetchReferences } from '../components/external-references'
+import { schemaDescriptions } from '../models'
 
-const prefix = 'ob:c:to-form'
-const schemas = {
-  Card: cardSchema.describe(),
-  Organization: orgSchema.describe(),
-  Transaction: transactionSchema.describe(),
-  TransactionType: transactionTypeSchema.describe()
-}
+const prefix = 'ob:c:conv:to-form'
 
 function getRequired(schemaDescription) {
   return Object.entries(schemaDescription.fields)
@@ -48,7 +39,7 @@ async function getNestedProperties(field) {
       uiSchema: {}
     }
   }
-  const innerSchema = schemas[field.meta.ref]
+  const innerSchema = schemaDescriptions[camelCase(field.meta.ref)]
   if (!innerSchema) {
     return {
       schema: {},
