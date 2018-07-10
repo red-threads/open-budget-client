@@ -3,10 +3,30 @@ import { schema as organizationSchema } from '@red-threads/open-budget-api/src/o
 import { schema as transactionSchema } from '@red-threads/open-budget-api/src/transaction/schema'
 import { schema as transactionTypeSchema } from '@red-threads/open-budget-api/src/transaction-type/schema'
 
-import { entity as cardEntity, setModel as cardSetModel, fields as cardFields } from './card'
-import { entity as organizationEntity, setModel as organizationSetModel, fields as organizationFields } from './organization'
-import { entity as transactionEntity, setModel as transactionSetModel, fields as transactionFields } from './transaction'
-import { entity as transactionTypeEntity, setModel as transactionTypeSetModel, fields as transactionTypeFields } from './transaction-type'
+import {
+  entity as cardEntity,
+  setModel as cardSetModel,
+  fields as cardFields,
+  fieldsList as cardFieldsList
+} from './card'
+import {
+  entity as organizationEntity,
+  setModel as organizationSetModel,
+  fields as organizationFields,
+  fieldsList as organizationFieldsList
+} from './organization'
+import {
+  entity as transactionEntity,
+  setModel as transactionSetModel,
+  fields as transactionFields,
+  fieldsList as transactionFieldsList
+} from './transaction'
+import {
+  entity as transactionTypeEntity,
+  setModel as transactionTypeSetModel,
+  fields as transactionTypeFields,
+  fieldsList as transactionTypeFieldsList
+} from './transaction-type'
 
 export const schemas = {
   card: cardSchema,
@@ -20,6 +40,13 @@ export const schemaDescriptions = {
   organization: organizationSchema.describe(),
   transaction: transactionSchema.describe(),
   transactionType: transactionTypeSchema.describe()
+}
+
+export const fieldsLists = {
+  card: cardFieldsList,
+  organization: organizationFieldsList,
+  transaction: transactionFieldsList,
+  transactionType: transactionTypeFieldsList
 }
 
 export const entities = {

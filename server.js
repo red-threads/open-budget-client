@@ -23,6 +23,7 @@ app.prepare()
       const createPage = route('/:entity/new')(pathname)
       const editPage = route('/:entity/:id/edit')(pathname)
       const getPage = route('/:entity/:id')(pathname)
+      const listPage = route('/:entity')(pathname)
       const createOrEditPage = createPage || editPage
 
       if (createOrEditPage && crudRoutes.includes(createOrEditPage.entity)) {
@@ -31,6 +32,10 @@ app.prepare()
       }
       if (getPage && crudRoutes.includes(getPage.entity)) {
         app.render(req, res, `/${getPage.entity}`, Object.assign(getPage, query))
+        return
+      }
+      if (listPage && crudRoutes.includes(listPage.entity)) {
+        app.render(req, res, `/list`, Object.assign(listPage, query))
         return
       }
 

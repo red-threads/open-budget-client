@@ -7,6 +7,12 @@ import { default as convertSchema } from '../converters/to-devour-model'
 export const { name, fields } = convertSchema(schema)
 export const entity = name
 
+export const fieldsList = [
+  'alias',
+  'parent',
+  'card'
+]
+
 export function setModel () {
   setCardModel()
 

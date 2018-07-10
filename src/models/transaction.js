@@ -9,6 +9,15 @@ import { setModel as setTransactionTypeModel } from './transaction-type'
 export const { name, fields } = convertSchema(schema)
 export const entity = name
 
+export const fieldsList = [
+  'type',
+  'from',
+  'to',
+  'gross',
+  'gatewayFee',
+  'source'
+]
+
 export function setModel () {
   setCardModel()
   setOrgModel()
