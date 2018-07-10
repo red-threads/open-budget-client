@@ -6,7 +6,7 @@ import { schema as orgSchema } from '@red-threads/open-budget-api/src/organizati
 import { schema as transactionSchema } from '@red-threads/open-budget-api/src/transaction/schema'
 import { schema as transactionTypeSchema } from '@red-threads/open-budget-api/src/transaction-type/schema'
 
-import { fetchReferences } from '../external-references'
+import { fetchReferences } from '../components/external-references'
 
 const prefix = 'ob:c:to-form'
 const schemas = {

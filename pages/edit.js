@@ -3,8 +3,9 @@ import React from 'react'
 import Form from 'react-jsonschema-form'
 
 import { default as jsonApi } from '../src/api'
+import { default as ExtRefSelect } from '../src/components/external-references/Select'
+import { default as Layout } from '../src/components/layout/Layout'
 import { default as toForm } from '../src/converters/to-form'
-import { default as ExtRefSelect } from '../src/ext-ref-select'
 import { schemas, setModels, defaultIncludes, defaultValues } from '../src/models'
 
 const debug = Debug('ob:c:pages:edit')
@@ -20,6 +21,9 @@ export default class extends React.Component {
     debug(schema)
     debug('schema ends')
     return {
+      action: id ? 'edit' : 'create',
+      entity,
+      id,
       initialData: id ?
         await jsonApi.find(entity, id, {
           include: defaultIncludes[entity].join(',')
@@ -30,18 +34,14 @@ export default class extends React.Component {
   }
 
   render () {
-    const { initialData: { data }, schema } = this.props
+    const { action, entity, initialData: { data }, schema } = this.props
     debug('data')
     debug(data)
     debug('schema')
     debug(schema)
     return (
-      <form>
-        <fieldset>
-          <legend>Form!</legend>
-          <pre>{JSON.stringify(data, '\t', 2)}</pre>
-        </fieldset>
-        <fieldset>
+      <Layout title={`${action} ${entity}`}>
+        <h1>{action === 'create' ? `Create new` : `Update #${entity}`}</h1>
         <Form {...schema}
           formData={data}
           onChange={() => console.log("changed")}
@@ -49,8 +49,7 @@ export default class extends React.Component {
           onError={() => console.log("errors")}
           widgets={widgets}
         />
-        </fieldset>
-      </form>
+      </Layout>
     )
   }
 }

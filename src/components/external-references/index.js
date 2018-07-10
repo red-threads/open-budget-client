@@ -1,4 +1,4 @@
-import { findOneOrAll } from './api'
+import { findOneOrAll } from '../../api'
 
 export const references = {}
 
