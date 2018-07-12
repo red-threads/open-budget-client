@@ -2,7 +2,7 @@ import { findOneOrAll } from '../../api'
 
 export const references = {}
 
-export function fetchReferences(entity) {
+export function fetchReferences (entity) {
   if (references[entity]) {
     return Promise.resolve(references[entity])
   }

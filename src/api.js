@@ -25,7 +25,7 @@ jsonApi.replaceMiddleware('errors', {
   }
 })
 
-export function findOneOrAll({ entity, id, options }) {
+export function findOneOrAll ({ entity, id, options }) {
   if (id) {
     return jsonApi.find(entity, id, options)
   }

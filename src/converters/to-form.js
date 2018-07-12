@@ -7,20 +7,20 @@ import { schemaDescriptions } from '../models'
 
 const prefix = 'ob:c:conv:to-form'
 
-function getRequired(schemaDescription) {
+function getRequired (schemaDescription) {
   return Object.entries(schemaDescription.fields)
     .reduce((requiredFields, [key, field]) =>
       field.tests.includes('required') ? addLast(requiredFields, key) : requiredFields, [])
 }
 
-function getType(type) {
+function getType (type) {
   if (type === 'mixed') {
     return 'object'
   }
   return type
 }
 
-function getDefault(type) {
+function getDefault (type) {
   if (type === 'string') {
     return ''
   } else if (type === 'number') {
@@ -28,10 +28,9 @@ function getDefault(type) {
   } else if (type === 'object' || type === 'mixed') {
     return {}
   }
-  return 
 }
 
-async function getNestedProperties(field) {
+async function getNestedProperties (field) {
   const debug = Debug(`${prefix}:getNestedProperties`)
   if (field.type !== 'mixed' || field.meta.type !== 'ObjectId') {
     return {
@@ -64,7 +63,7 @@ async function getNestedProperties(field) {
   }
 }
 
-async function getArray(field) {
+async function getArray (field) {
   const debug = Debug(`${prefix}:getArray`)
   if (field.type !== 'array') {
     return {
@@ -86,7 +85,7 @@ async function getArray(field) {
   }
 }
 
-function getEnum({ meta: { oneOf } = {} }) {
+function getEnum ({ meta: { oneOf } = {} }) {
   const debug = Debug(`${prefix}:getEnum`)
   debug(oneOf)
   if (oneOf) {
@@ -97,7 +96,7 @@ function getEnum({ meta: { oneOf } = {} }) {
   return {}
 }
 
-async function getField(field) {
+async function getField (field) {
   const debug = Debug(`${prefix}:getField`)
   debug(field)
   const { schema: arraySchema, uiSchema: arrayUiSchema } = await getArray(field)
@@ -127,7 +126,7 @@ async function getField(field) {
   }
 }
 
-async function getFields(schemaDescription) {
+async function getFields (schemaDescription) {
   const debug = Debug(`${prefix}:getFields`)
   let schema = {
     id: {
@@ -142,7 +141,7 @@ async function getFields(schemaDescription) {
   }
   const fields = Object.entries(schemaDescription.fields)
 
-  for ([ key, field ] of fields) {
+  for (let [ key, field ] of fields) {
     const { schema: fieldSchema, uiSchema: fieldUiSchema } = await getField(field)
     schema = set(schema, key, fieldSchema)
     uiSchema = set(uiSchema, key, fieldUiSchema)

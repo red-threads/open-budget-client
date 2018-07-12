@@ -1,6 +1,6 @@
 import { merge, set } from 'timm'
 
-function resolveRelationship({ type, ref }, originalType) {
+function resolveRelationship ({ type, ref }, originalType) {
   const isArray = originalType === 'array'
   if (!type || type !== 'ObjectId') {
     return isArray ? [] : ''
@@ -11,7 +11,7 @@ function resolveRelationship({ type, ref }, originalType) {
   }
 }
 
-function getDefaultValue({ meta, type, innerType }, originalType) {
+function getDefaultValue ({ meta, type, innerType }, originalType) {
   switch (type) {
     case 'string':
       return ''

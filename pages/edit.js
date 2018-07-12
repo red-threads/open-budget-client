@@ -24,11 +24,11 @@ export default class extends React.Component {
       action: id ? 'edit' : 'create',
       entity,
       id,
-      initialData: id ?
-        await jsonApi.find(entity, id, {
+      initialData: id
+        ? await jsonApi.find(entity, id, {
           include: defaultIncludes[entity].join(',')
-        }) :
-        defaultValues,
+        })
+        : defaultValues,
       schema
     }
   }
@@ -44,9 +44,9 @@ export default class extends React.Component {
         <h1>{action === 'create' ? `Create new` : `Update #${entity}`}</h1>
         <Form {...schema}
           formData={data}
-          onChange={() => console.log("changed")}
-          onSubmit={() => console.log("submitted")}
-          onError={() => console.log("errors")}
+          onChange={() => console.log('changed')}
+          onSubmit={() => console.log('submitted')}
+          onError={() => console.log('errors')}
           widgets={widgets}
         />
       </Layout>

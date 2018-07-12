@@ -4,13 +4,13 @@ import React from 'react'
 
 const debug = Debug('ob:c:comp:ext-ref')
 
-export default function ExtRefSelect(props) {
+export default function ExtRefSelect (props) {
   debug('value')
   debug(props.options)
 
   return [
     <select>
-      <option value="">None</option>
+      <option value=''>None</option>
       {
         props.options.items.map(item => (
           <option

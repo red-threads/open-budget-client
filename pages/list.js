@@ -39,16 +39,16 @@ export default class extends React.Component {
       return <div style={{ backgroundColor: 'red', color: 'white' }}>{JSON.stringify(errors, '\t', 2)}</div>
     }
     return (
-      <Layout title="Organizations">
+      <Layout title='Organizations'>
         <h1>List of {pluralize(entity)}</h1>
         <p>{schema.meta.description}</p>
         <main>
-          <table className="table">
+          <table className='table'>
             <thead>
               <tr>
                 {
                   fieldsList.map(({ fieldName }) => (
-                    <th scope="col">{StartCase(field.fieldName)}</th>
+                    <th scope='col'>{StartCase(fieldName)}</th>
                   ))
                 }
               </tr>
