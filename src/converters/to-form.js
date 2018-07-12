@@ -86,6 +86,17 @@ async function getArray(field) {
   }
 }
 
+function getEnum({ meta: { oneOf } = {} }) {
+  const debug = Debug(`${prefix}:getEnum`)
+  debug(oneOf)
+  if (oneOf) {
+    return {
+      enum: oneOf
+    }
+  }
+  return {}
+}
+
 async function getField(field) {
   const debug = Debug(`${prefix}:getField`)
   debug(field)
@@ -102,6 +113,7 @@ async function getField(field) {
       default: getDefault(field.type),
       title: field.label
     },
+    getEnum(field),
     arraySchema,
     objectSchema
   )
