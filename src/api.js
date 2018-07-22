@@ -9,18 +9,18 @@ const jsonApi = new JsonApi({
 })
 jsonApi.replaceMiddleware('errors', {
   name: 'custom-error',
-  error: ({ request, response }) => {
+  error: (payload) => {
+    const { data, status, config, headers, method, url} = payload
     rollbar.error(`Devour client error`, {
-      status: response.status,
-      data: response.data,
-      config: response.config,
-      responseHeaders: response.headers,
-      requestHeaders: request.headers,
-      path: request.path,
-      method: request.method
+      status,
+      data,
+      config,
+      headers,
+      url,
+      method
     })
     return {
-      errors: response && response.data ? response.data.errors : null
+      errors: data && data.data ? data.data.errors : [ payload ]
     }
   }
 })
