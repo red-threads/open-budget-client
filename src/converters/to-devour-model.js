@@ -19,7 +19,7 @@ function getDefaultValue ({ meta, type, innerType }, originalType) {
       return 0
     case 'array':
       return getDefaultValue(innerType, type)
-    case 'mixed':
+    case 'object':
       return resolveRelationship(meta, originalType)
     default:
       return ''

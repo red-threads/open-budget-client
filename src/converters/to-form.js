@@ -13,26 +13,19 @@ function getRequired (schemaDescription) {
       field.tests.includes('required') ? addLast(requiredFields, key) : requiredFields, [])
 }
 
-function getType (type) {
-  if (type === 'mixed') {
-    return 'object'
-  }
-  return type
-}
-
 function getDefault (type) {
   if (type === 'string') {
     return ''
   } else if (type === 'number') {
     return 0
-  } else if (type === 'object' || type === 'mixed') {
-    return {}
+  } else if (type === 'object') {
+    return ''
   }
 }
 
 async function getNestedProperties (field) {
   const debug = Debug(`${prefix}:getNestedProperties`)
-  if (field.type !== 'mixed' || field.meta.type !== 'ObjectId') {
+  if (field.type !== 'object' || field.meta.type !== 'ObjectId') {
     return {
       schema: {},
       uiSchema: {}
@@ -51,13 +44,21 @@ async function getNestedProperties (field) {
 
   return {
     schema: {
-      type: 'string'
+      type: 'object',
+      properties: {
+        id: {
+          type: 'string',
+          default: ''
+        }
+      }
     },
     uiSchema: {
-      'ui:widget': 'ref',
-      'ui:options': {
-        innerSchema,
-        items
+      id: {
+        'ui:widget': 'ref',
+        'ui:options': {
+          innerSchema,
+          items
+        }
       }
     }
   }
@@ -77,6 +78,7 @@ async function getArray (field) {
   debug(innerSchema)
   return {
     schema: {
+      default: [],
       items: innerSchema
     },
     uiSchema: {
@@ -106,12 +108,15 @@ async function getField (field) {
   const { schema: objectSchema = {}, uiSchema: objectUiSchema = {} } = await getNestedProperties(field)
   debug('nested')
   debug(objectUiSchema)
+  const defaultValue = getDefault(field.type)
   const schema = Object.assign(
     {
-      type: getType(field.type),
-      default: getDefault(field.type),
+      type: field.type,
       title: field.label
     },
+    defaultValue ? {
+      default: defaultValue
+    } : {},
     getEnum(field),
     arraySchema,
     objectSchema
@@ -158,16 +163,20 @@ export default async function toForm (inputSchema) {
   const schemaDescription = inputSchema.describe()
   debug(schemaDescription)
   const { schema: fieldsSchema, uiSchema } = await getFields(schemaDescription)
-  debug('post')
+  debug('## ui schema ##')
   debug(uiSchema)
+  debug('#######')
   const schema = {
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "http://json-schema.org/draft-07/schema#",
     title: schemaDescription.meta.description,
     type: 'object',
     required: getRequired(schemaDescription),
     properties: fieldsSchema
   }
-  debug('toForm jsonSchema')
-  debug(schema)
+  debug('## JSON schema ##')
+  debug(JSON.stringify(schema, '\t', 2))
+  debug('#######')
   return {
     schema,
     uiSchema

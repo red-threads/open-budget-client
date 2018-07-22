@@ -23,7 +23,7 @@ export default class extends React.Component {
       initialData: await findOneOrAll({
         entity,
         options: {
-          include: defaultIncludes[entity]
+          include: defaultIncludes[entity].join(',')
         }
       }).then(({ data }) => data),
       schema
@@ -46,6 +46,7 @@ export default class extends React.Component {
           <table className='table'>
             <thead>
               <tr>
+                <th scope='col'>ID</th>
                 {
                   fieldsList.map(({ fieldName }) => (
                     <th scope='col'>{StartCase(fieldName)}</th>
@@ -57,9 +58,18 @@ export default class extends React.Component {
               {
                 initialData.map(item => (
                   <tr>
+                    <td>
+                      <a href={item.links.self}>{item.id}</a>
+                    </td>
                     {
                       fieldsList.map(({ fieldName, isIndex }) => (
-                        <td scope={isIndex ? 'row' : ''}>{item[fieldName]}</td>
+                        <td scope={isIndex ? 'row' : ''}>{
+                          item[fieldName] && item[fieldName].id
+                          ? (
+                            <a href={item[fieldName].links.self}>{item[fieldName].id}</a>
+                          )
+                          : item[fieldName]
+                        }</td>
                       ))
                     }
                   </tr>

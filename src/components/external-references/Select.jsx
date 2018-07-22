@@ -9,7 +9,7 @@ export default function ExtRefSelect (props) {
   debug(props.options)
 
   return [
-    <select>
+    <select onChange={event => props.onChange({ id: event.target.value })}>
       <option value=''>None</option>
       {
         props.options.items.map(item => (
