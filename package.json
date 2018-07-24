@@ -19,7 +19,7 @@
     "publish": "npm publish",
     "prerelease": "npm run lint",
     "release": "standard-version",
-    "postrelease": "run-p push-tags deploy publish"
+    "postrelease": "run-p push-tags deploy"
   },
   "repository": {
     "type": "git",
