@@ -37,11 +37,11 @@ export default class extends React.Component {
     }
   }
 
-  componentDidMount() {
+  componentDidMount () {
     setModels[this.props.entity]()
   }
 
-  validate(formData, errors) {
+  validate (formData, errors) {
     const schema = schemas[this.props.entity]
     try {
       schema.validateSync(formData, {
@@ -56,12 +56,12 @@ export default class extends React.Component {
     return errors
   }
 
-  transformErrors(errors) {
+  transformErrors (errors) {
     // yep is more than enough to validate the form
     return {}
   }
 
-  async onSubmit({ formData }) {
+  async onSubmit ({ formData }) {
     const { apiOptions, entity, action } = this.props
     const response = await jsonApi[action === 'edit' ? 'update' : 'create'](entity, formData, apiOptions)
     console.log(response)
@@ -82,7 +82,7 @@ export default class extends React.Component {
           widgets={widgets}
           validate={(...args) => this.validate(...args)}
           transformErrors={(...args) => this.transformErrors(...args)}
-          className="pt-3"
+          className='pt-3'
         />
       </Layout>
     )

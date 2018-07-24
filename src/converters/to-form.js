@@ -167,8 +167,8 @@ export default async function toForm (inputSchema) {
   debug(uiSchema)
   debug('#######')
   const schema = {
-    "$schema": "http://json-schema.org/draft-07/schema#",
-    "$id": "http://json-schema.org/draft-07/schema#",
+    '$schema': 'http://json-schema.org/draft-07/schema#',
+    '$id': 'http://json-schema.org/draft-07/schema#',
     title: schemaDescription.meta.description,
     type: 'object',
     required: getRequired(schemaDescription),

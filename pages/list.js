@@ -65,10 +65,10 @@ export default class extends React.Component {
                       fieldsList.map(({ fieldName, isIndex }) => (
                         <td scope={isIndex ? 'row' : ''}>{
                           item[fieldName] && item[fieldName].id
-                          ? (
-                            <a href={item[fieldName].links.self}>{item[fieldName].id}</a>
-                          )
-                          : item[fieldName]
+                            ? (
+                              <a href={item[fieldName].links.self}>{item[fieldName].id}</a>
+                            )
+                            : item[fieldName]
                         }</td>
                       ))
                     }
