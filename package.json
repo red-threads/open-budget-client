@@ -16,7 +16,7 @@
     "start": "NODE_ENV=production node server.js",
     "push-tags": "git push --follow-tags origin master",
     "deploy": "now --public && now alias && now rm @red-threads/open-budget-client -sy",
-    "publish": "npm publish",
+    "publish": "npm publish --access=public",
     "prerelease": "npm run lint",
     "release": "standard-version",
     "postrelease": "run-p push-tags deploy"
