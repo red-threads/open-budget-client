@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.3.0"></a>
+# [0.3.0](https://github.com/red-threads/open-budget-client/compare/v0.2.0...v0.3.0) (2018-07-24)
+
+
+### Bug Fixes
+
+* add missing npm publish script ([3edd79e](https://github.com/red-threads/open-budget-client/commit/3edd79e))
+* crossorigin -> crossOrigin, and footer copy ([0e153e3](https://github.com/red-threads/open-budget-client/commit/0e153e3))
+* eslint issues ([2abae90](https://github.com/red-threads/open-budget-client/commit/2abae90))
+* report errors correctly ([bf6cab2](https://github.com/red-threads/open-budget-client/commit/bf6cab2))
+
+
+### Features
+
+* edit page with validation and submit features ([9708f33](https://github.com/red-threads/open-budget-client/commit/9708f33))
+* handle nested object types/ref ([d88de18](https://github.com/red-threads/open-budget-client/commit/d88de18))
+
+
+
 <a name="0.2.0"></a>
 # [0.2.0](https://github.com/red-threads/open-budget-client/compare/v0.1.0...v0.2.0) (2018-07-13)
 
