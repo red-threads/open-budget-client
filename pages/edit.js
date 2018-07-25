@@ -19,9 +19,10 @@ export default class extends React.Component {
     debug('entity', entity)
     setModels[entity]()
     const schema = await toForm(schemas[entity])
-    const apiOptions = {
-      include: defaultIncludes[entity].join(',')
-    }
+    const include = defaultIncludes[entity].join(',')
+    const apiOptions = Object.assign({},
+      include ? { include } : {}
+    )
     debug('schema starts')
     debug(schema)
     debug('schema ends')

@@ -16,15 +16,17 @@ export default class extends React.Component {
     const schema = schemaDescriptions[entity]
     const fieldsList = fieldsLists[entity]
       .map(fieldName => merge(schema.fields[fieldName], { fieldName }))
+    const include = defaultIncludes[entity].join(',')
+    const options = Object.assign({},
+      include ? { include } : {}
+    )
     return {
       action: 'list',
       entity,
       fieldsList,
       initialData: await findOneOrAll({
         entity,
-        options: {
-          include: defaultIncludes[entity].join(',')
-        }
+        options
       }).then(({ data }) => data),
       schema
     }
