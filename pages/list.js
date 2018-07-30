@@ -1,5 +1,7 @@
 import Debug from 'debug'
+import camelCase from 'lodash.camelcase'
 import StartCase from 'lodash.startcase'
+import Link from 'next/link'
 import pluralize from 'pluralize'
 import React from 'react'
 import { merge } from 'timm'
@@ -12,17 +14,19 @@ const debug = Debug('ob:c:pages:list')
 
 export default class extends React.Component {
   static async getInitialProps ({ query: { entity } }) {
-    setModels[entity]()
-    const schema = schemaDescriptions[entity]
-    const fieldsList = fieldsLists[entity]
+    const camelCaseEntity = camelCase(entity)
+    setModels[camelCaseEntity]()
+    const schema = schemaDescriptions[camelCaseEntity]
+    const fieldsList = fieldsLists[camelCaseEntity]
       .map(fieldName => merge(schema.fields[fieldName], { fieldName }))
-    const include = defaultIncludes[entity].join(',')
+    const include = defaultIncludes[camelCaseEntity].join(',')
     const options = Object.assign({},
       include ? { include } : {}
     )
     return {
       action: 'list',
       entity,
+      camelCaseEntity,
       fieldsList,
       initialData: await findOneOrAll({
         entity,
@@ -78,6 +82,11 @@ export default class extends React.Component {
                 ))
               }
             </tbody>
+            <tfoot>
+              <Link href={`${entity}/new`}>
+                <a>Add new</a>
+              </Link>
+            </tfoot>
           </table>
         </main>
       </Layout>
