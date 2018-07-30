@@ -14,6 +14,7 @@ function resolveRelationship ({ type, ref }, originalType) {
 function getDefaultValue ({ meta, type, innerType }, originalType) {
   switch (type) {
     case 'string':
+    case 'date':
       return ''
     case 'number':
       return 0

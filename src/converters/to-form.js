@@ -20,6 +20,8 @@ function getDefault (type) {
     return 0
   } else if (type === 'object') {
     return ''
+  } else if (type === 'date') {
+    return ''
   }
 }
 
@@ -98,6 +100,21 @@ function getEnum ({ meta: { oneOf } = {} }) {
   return {}
 }
 
+function getDateSchema(field) {
+  if (field.type === 'date') {
+    return {
+      schema: {
+        type: 'string',
+        format: 'date'
+      },
+      uiSchema: {
+        'ui:widget': 'alt-date'
+      }
+    }
+  }
+  return {}
+}
+
 async function getField (field) {
   const debug = Debug(`${prefix}:getField`)
   debug(field)
@@ -109,6 +126,7 @@ async function getField (field) {
   debug('nested')
   debug(objectUiSchema)
   const defaultValue = getDefault(field.type)
+  const { schema: dateSchema, uiSchema: dateUiSchema } = getDateSchema(field)
   const schema = Object.assign(
     {
       type: field.type,
@@ -119,11 +137,13 @@ async function getField (field) {
     } : {},
     getEnum(field),
     arraySchema,
-    objectSchema
+    objectSchema,
+    dateSchema
   )
   const uiSchema = Object.assign({},
     arrayUiSchema,
-    objectUiSchema
+    objectUiSchema,
+    dateUiSchema
   )
   return {
     schema,
