@@ -5,8 +5,9 @@ import Rollbar from './rollbar'
 const rollbar = Rollbar()
 
 const jsonApi = new JsonApi({
-  apiUrl: 'https://open-budget-api.now.sh'
+  apiUrl: process.env.API_URL
 })
+console.log('API:', process.env.API_URL)
 jsonApi.replaceMiddleware('errors', {
   name: 'custom-error',
   error: (payload) => {

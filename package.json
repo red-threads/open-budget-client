@@ -63,6 +63,7 @@
   "now": {
     "alias": "open-budget",
     "env": {
+      "API_URL": "@api-url",
       "ROLLBAR_TOKEN": "@rollbar-token",
       "NODE_ENV": "production"
     }
