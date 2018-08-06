@@ -65,7 +65,9 @@ export default class extends React.Component {
                 initialData.map(item => (
                   <tr key={item.id}>
                     <td>
-                      <a href={item.links.self}>{item.id}</a>
+                      <Link href={`/${entity}/${item.id}`}>
+                        <a>{item.id}</a>
+                      </Link>
                     </td>
                     {
                       fieldsList.map(({ fieldName, isIndex }) => (
