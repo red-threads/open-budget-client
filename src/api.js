@@ -7,7 +7,6 @@ const rollbar = Rollbar()
 const jsonApi = new JsonApi({
   apiUrl: process.env.API_URL
 })
-console.log('API:', process.env.API_URL)
 jsonApi.replaceMiddleware('errors', {
   name: 'custom-error',
   error: (payload) => {
