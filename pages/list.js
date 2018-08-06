@@ -55,7 +55,7 @@ export default class extends React.Component {
                 <th scope='col'>ID</th>
                 {
                   fieldsList.map(({ fieldName }) => (
-                    <th scope='col'>{StartCase(fieldName)}</th>
+                    <th scope='col' key={fieldName}>{StartCase(fieldName)}</th>
                   ))
                 }
               </tr>
@@ -63,13 +63,13 @@ export default class extends React.Component {
             <tbody>
               {
                 initialData.map(item => (
-                  <tr>
+                  <tr key={item.id}>
                     <td>
                       <a href={item.links.self}>{item.id}</a>
                     </td>
                     {
                       fieldsList.map(({ fieldName, isIndex }) => (
-                        <td scope={isIndex ? 'row' : ''}>{
+                        <td scope={isIndex ? 'row' : ''} key={fieldName}>{
                           item[fieldName] && item[fieldName].id
                             ? (
                               <a href={item[fieldName].links.self}>{item[fieldName].id}</a>
@@ -83,9 +83,13 @@ export default class extends React.Component {
               }
             </tbody>
             <tfoot>
-              <Link href={`${entity}/new`}>
-                <a>Add new</a>
-              </Link>
+              <tr>
+                <td colSpan={fieldsList.length}>
+                  <Link href={`${entity}/new`}>
+                    <a>Add new</a>
+                  </Link>
+                </td>
+              </tr>
             </tfoot>
           </table>
         </main>
