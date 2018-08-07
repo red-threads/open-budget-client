@@ -79,10 +79,11 @@ export default class extends React.Component {
       Alert.error(`Entity ${action} failed! ${JSON.stringify(response.errors)}`)
     } else {
       Alert.success(
-        <div>Entity {action} succeeded! Link:
+        <div>
+          Entity {action} succeeded! Link:
           <Link href={`/${entity}/${response.data.id}`}>
-          <a>{response.data.id}</a>
-        </Link>
+            <a>{response.data.id}</a>
+          </Link>
         </div>
       )
     }

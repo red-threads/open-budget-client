@@ -1,9 +1,6 @@
 import Debug from 'debug'
 import camelCase from 'lodash.camelcase'
-import Link from 'next/link'
 import React from 'react'
-import Form from 'react-jsonschema-form'
-import Alert from 'react-s-alert'
 
 import { default as jsonApi } from '../src/api'
 import { default as Layout } from '../src/components/layout/Layout'
