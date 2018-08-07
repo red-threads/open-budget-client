@@ -16,7 +16,7 @@ export default class OpenBudgetApp extends App {
           <meta name='viewport' content='initial-scale=1.0, width=device-width' />
         </Head>
         <Component {...pageProps} />
-        <Alert stack={{limit: 3}} effect="stackslide" position="bottom" preserveContext />
+        <Alert stack={{limit: 3}} effect='stackslide' position='bottom' preserveContext />
       </Container>
     )
   }

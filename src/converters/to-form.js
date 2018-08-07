@@ -100,7 +100,7 @@ function getEnum ({ meta: { oneOf } = {} }) {
   return {}
 }
 
-function getDateSchema(field) {
+function getDateSchema (field) {
   if (field.type === 'date') {
     return {
       schema: {
