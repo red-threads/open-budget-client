@@ -2,6 +2,32 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.4.0"></a>
+# [0.4.0](https://github.com/red-threads/open-budget-client/compare/v0.3.0...v0.4.0) (2018-08-07)
+
+
+### Bug Fixes
+
+* add access flag to npm publish ([1e3d15f](https://github.com/red-threads/open-budget-client/commit/1e3d15f))
+* add missing react key attributes ([68f6af7](https://github.com/red-threads/open-budget-client/commit/68f6af7))
+* expose env variables on client side ([54e973a](https://github.com/red-threads/open-budget-client/commit/54e973a))
+* filter routes by entity names ([a1a5466](https://github.com/red-threads/open-budget-client/commit/a1a5466))
+* lint issues ([2bab547](https://github.com/red-threads/open-budget-client/commit/2bab547))
+* lint issues ([26e802a](https://github.com/red-threads/open-budget-client/commit/26e802a))
+* set include parameter only if not empty ([7645e2c](https://github.com/red-threads/open-budget-client/commit/7645e2c))
+* variable api url ([500b0da](https://github.com/red-threads/open-budget-client/commit/500b0da))
+
+
+### Features
+
+* add custom error page ([2beb0b5](https://github.com/red-threads/open-budget-client/commit/2beb0b5))
+* add item page ([9f09e82](https://github.com/red-threads/open-budget-client/commit/9f09e82))
+* add new link ([ca1416b](https://github.com/red-threads/open-budget-client/commit/ca1416b))
+* handle date types ([d769ac8](https://github.com/red-threads/open-budget-client/commit/d769ac8))
+* implement notifications ([f4249e1](https://github.com/red-threads/open-budget-client/commit/f4249e1))
+
+
+
 <a name="0.3.0"></a>
 # [0.3.0](https://github.com/red-threads/open-budget-client/compare/v0.2.0...v0.3.0) (2018-07-24)
 
