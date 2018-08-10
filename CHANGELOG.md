@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.5.0"></a>
+# [0.5.0](https://github.com/red-threads/open-budget-client/compare/v0.4.0...v0.5.0) (2018-08-10)
+
+
+### Bug Fixes
+
+* eslint issues ([abd6313](https://github.com/red-threads/open-budget-client/commit/abd6313))
+* expose auth0 env vars ([5c5785d](https://github.com/red-threads/open-budget-client/commit/5c5785d))
+* replace err with errors (devour standard) ([8bee06f](https://github.com/red-threads/open-budget-client/commit/8bee06f))
+
+
+### Features
+
+* authentication ([4fd63b4](https://github.com/red-threads/open-budget-client/commit/4fd63b4))
+
+
+
 <a name="0.4.0"></a>
 # [0.4.0](https://github.com/red-threads/open-budget-client/compare/v0.3.0...v0.4.0) (2018-08-07)
 
