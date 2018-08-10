@@ -1,9 +1,12 @@
 import React from 'react'
 
 export default class Error extends React.Component {
-  static getInitialProps ({ res, err }) {
+  static getInitialProps ({ res, err, errors = {} }) {
     const statusCode = res ? res.statusCode : err ? err.statusCode : null
-    return { err, statusCode }
+    return {
+      errors,
+      statusCode
+    }
   }
 
   render () {
@@ -16,7 +19,7 @@ export default class Error extends React.Component {
         </p>
         {
           process.env.NODE_ENV !== 'production' && (
-            <pre>{JSON.stringify(this.props.err, '\t', 2)}</pre>
+            <pre>{JSON.stringify(this.props.errors, '\t', 2)}</pre>
           )
         }
       </React.Fragment>
