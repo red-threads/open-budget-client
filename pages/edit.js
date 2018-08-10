@@ -10,13 +10,14 @@ import { default as ExtRefSelect } from '../src/components/external-references/S
 import { default as Layout } from '../src/components/layout/Layout'
 import { default as toForm } from '../src/converters/to-form'
 import { schemas, setModels, defaultIncludes, defaultValues } from '../src/models'
+import withAuth from '../src/auth/withAuth'
 
 const debug = Debug('ob:c:pages:edit')
 const widgets = {
   ref: ExtRefSelect
 }
 
-export default class extends React.Component {
+export class Edit extends React.Component {
   static async getInitialProps ({ query: { id, entity } }) {
     debug('gip', id)
     debug('entity', entity)
@@ -74,7 +75,6 @@ export default class extends React.Component {
       delete formData.id
     }
     const response = await jsonApi[action === 'edit' ? 'update' : 'create'](entity, formData, apiOptions)
-    console.log(response)
     if (response.errors) {
       Alert.error(`Entity ${action} failed! ${JSON.stringify(response.errors)}`)
     } else {
@@ -110,3 +110,5 @@ export default class extends React.Component {
     )
   }
 }
+
+export default withAuth(Edit)

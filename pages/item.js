@@ -6,10 +6,11 @@ import { default as jsonApi } from '../src/api'
 import { default as Layout } from '../src/components/layout/Layout'
 import { default as toForm } from '../src/converters/to-form'
 import { schemas, setModels, defaultIncludes, defaultValues } from '../src/models'
+import withAuth from '../src/auth/withAuth'
 
 const debug = Debug('ob:c:pages:item')
 
-export default class extends React.Component {
+export class Item extends React.Component {
   static async getInitialProps ({ query: { id, entity } }) {
     debug('gip', id)
     debug('entity', entity)
@@ -60,3 +61,5 @@ export default class extends React.Component {
     )
   }
 }
+
+export default withAuth(Item)

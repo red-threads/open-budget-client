@@ -9,10 +9,11 @@ import { merge } from 'timm'
 import { findOneOrAll } from '../src/api'
 import Layout from '../src/components/layout/Layout'
 import { schemaDescriptions, setModels, defaultIncludes, fieldsLists } from '../src/models'
+import withAuth from '../src/auth/withAuth'
 
 const debug = Debug('ob:c:pages:list')
 
-export default class extends React.Component {
+export class List extends React.Component {
   static async getInitialProps ({ query: { entity } }) {
     const camelCaseEntity = camelCase(entity)
     setModels[camelCaseEntity]()
@@ -38,6 +39,7 @@ export default class extends React.Component {
 
   render () {
     const { entity, errors, fieldsList, initialData, schema } = this.props
+    console.log(this.props.userProfile)
     debug(entity)
     debug(errors)
     debug(schema)
@@ -99,3 +101,5 @@ export default class extends React.Component {
     )
   }
 }
+
+export default withAuth(List)

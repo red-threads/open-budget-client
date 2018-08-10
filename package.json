@@ -39,6 +39,7 @@
   "homepage": "https://github.com/red-threads/open-budget-client#readme",
   "dependencies": {
     "@red-threads/open-budget-api": "*",
+    "auth0-js": "^9.7.3",
     "babel-plugin-inline-dotenv": "^1.1.2",
     "babel-plugin-transform-inline-environment-variables": "^0.4.3",
     "debug": "^3.1.0",
