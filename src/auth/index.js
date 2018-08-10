@@ -1,9 +1,8 @@
 import Auth0 from 'auth0-js'
 import Router from 'next/router'
-import { resolve } from 'url';
 
 let provider
-function getProvider() {
+function getProvider () {
   if (!provider) {
     provider = new Auth0.WebAuth({
       domain: process.env.AUTH0_DOMAIN,
@@ -17,11 +16,11 @@ function getProvider() {
   return provider
 }
 
-export function login() {
+export function login () {
   getProvider().authorize()
 }
 
-export function handleAuthentication() {
+export function handleAuthentication () {
   getProvider().parseHash((err, authResult) => {
     if (authResult && authResult.accessToken && authResult.idToken) {
       setSession(authResult)
@@ -33,35 +32,35 @@ export function handleAuthentication() {
   })
 }
 
-export function setSession(authResult) {
+export function setSession (authResult) {
   let expiresAt = JSON.stringify((authResult.expiresIn * 1000) + new Date().getTime())
-  localStorage.setItem('access_token', authResult.accessToken)
-  localStorage.setItem('id_token', authResult.idToken)
-  localStorage.setItem('expires_at', expiresAt)
+  global.localStorage.setItem('access_token', authResult.accessToken)
+  global.localStorage.setItem('id_token', authResult.idToken)
+  global.localStorage.setItem('expires_at', expiresAt)
   Router.replace('/home')
 }
 
-export function logout() {
-  localStorage.removeItem('access_token')
-  localStorage.removeItem('id_token')
-  localStorage.removeItem('expires_at')
+export function logout () {
+  global.localStorage.removeItem('access_token')
+  global.localStorage.removeItem('id_token')
+  global.localStorage.removeItem('expires_at')
   Router.replace('/')
 }
 
-export function isAuthenticated() {
+export function isAuthenticated () {
   const expiresAt = JSON.parse(global.localStorage.getItem('expires_at'))
   return new Date().getTime() < expiresAt
 }
 
-export function getAccessToken() {
-  const accessToken = localStorage.getItem('access_token')
+export function getAccessToken () {
+  const accessToken = global.localStorage.getItem('access_token')
   if (!accessToken) {
     throw new Error('No Access Token found')
   }
   return accessToken
 }
 
-export function getProfile() {
+export function getProfile () {
   let accessToken = getAccessToken()
   return new Promise((resolve, reject) => {
     getProvider().client.userInfo(accessToken, (err, profile) => {

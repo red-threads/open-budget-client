@@ -2,15 +2,15 @@ import Router from 'next/router'
 import * as React from 'react'
 import * as Auth from './index'
 
-function getDisplayName(Component) {
+function getDisplayName (Component) {
   return Component.displayName || Component.name || 'Unknown'
 }
 
-export default function withAuth(Page) {
+export default function withAuth (Page) {
   const childComponentName = getDisplayName(Page)
 
   return class WithAuth extends React.Component {
-    constructor(...props) {
+    constructor (...props) {
       super(...props)
       this.state = {
         isAuthenticated: false,
@@ -23,11 +23,11 @@ export default function withAuth(Page) {
       return `WithAuth(${childComponentName})`
     }
 
-    static async getInitialProps(...args) {
-      return Page.getInitialProps ? await Page.getInitialProps(...args) : {}
+    static async getInitialProps (...args) {
+      return Page.getInitialProps ? Page.getInitialProps(...args) : {}
     }
 
-    componentDidMount() {
+    componentDidMount () {
       const isAuthenticated = Auth.isAuthenticated()
       this.setState({
         hasChecked: true,
@@ -39,7 +39,7 @@ export default function withAuth(Page) {
         })
       }
     }
-/*
+    /*
     componentDidUpdate() {
       if (!this.state.hasChecked) {
         const isAuthenticated = Auth.isAuthenticated()
@@ -51,7 +51,7 @@ export default function withAuth(Page) {
           this.getProfile()
         }
       }
-    }*/
+    } */
 
     render () {
       if (!this.state.hasChecked) {

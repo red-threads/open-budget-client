@@ -5,7 +5,7 @@ export default () => (
   <Layout>
     <main>
       <h1>Open Budget WebClient</h1>
-      <Link href="/login">
+      <Link href='/login'>
         <a>Please login</a>
       </Link>
     </main>

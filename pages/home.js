@@ -3,7 +3,7 @@ import Layout from '../src/components/layout/Layout'
 import withAuth from '../src/auth/withAuth'
 
 export class Home extends React.Component {
-  render() {
+  render () {
     return (
       <Layout>
         <main>
