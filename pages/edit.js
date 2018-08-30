@@ -4,8 +4,10 @@ import Link from 'next/link'
 import React from 'react'
 import Form from 'react-jsonschema-form'
 import Alert from 'react-s-alert'
+import { mergeDeep } from 'timm'
 
 import { default as jsonApi } from '../src/api'
+import { CREATE, UPDATE } from '../src/auth/roles'
 import { default as ExtRefSelect } from '../src/components/external-references/Select'
 import { default as Layout } from '../src/components/layout/Layout'
 import { default as toForm } from '../src/converters/to-form'
@@ -32,24 +34,36 @@ export class Edit extends React.Component {
     debug(schema)
     debug('schema ends')
     return {
-      action: id ? 'edit' : 'create',
+      action: id ? UPDATE : CREATE,
       apiOptions,
       camelCaseEntity,
       entity,
       id,
       initialData: id
         ? await jsonApi.find(camelCaseEntity, id, apiOptions)
-        : defaultValues,
+        : {
+          data: defaultValues[camelCaseEntity]
+        },
       schema
     }
   }
 
   componentDidMount () {
-    setModels[this.props.entity]()
+    setModels[this.props.camelCaseEntity]()
   }
 
   validate (formData, errors) {
-    const schema = schemas[this.props.entity]
+    const nextProps = mergeDeep(this.props, {
+      initialData: {
+        data: formData
+      }
+    })
+    if (!this.onDemandRoleCheck(nextProps)) {
+      Alert.error('Not enough permissions to do this')
+      errors.id.addError('Role check failed. Insufficient permissions')
+      return errors
+    }
+    const schema = schemas[this.props.camelCaseEntity]
     try {
       schema.validateSync(formData, {
         abortEarly: false
@@ -71,10 +85,10 @@ export class Edit extends React.Component {
 
   async onSubmit ({ formData }) {
     const { apiOptions, entity, action } = this.props
-    if (action === 'create') {
+    if (action === CREATE) {
       delete formData.id
     }
-    const response = await jsonApi[action === 'edit' ? 'update' : 'create'](entity, formData, apiOptions)
+    const response = await jsonApi[action === UPDATE ? 'update' : 'create'](entity, formData, apiOptions)
     if (response.errors) {
       Alert.error(`Entity ${action} failed! ${JSON.stringify(response.errors)}`)
     } else {
@@ -97,7 +111,7 @@ export class Edit extends React.Component {
     debug(schema.schema)
     return (
       <Layout title={`${action} ${entity}`}>
-        <h1>{action === 'create' ? `Create new` : `Update ${data.name || data.organization} ${entity}`}</h1>
+        <h1>{action === CREATE ? `Create new` : `Update ${data.name || data.organization} ${entity}`}</h1>
         <Form {...schema}
           formData={data}
           onSubmit={(...args) => this.onSubmit(...args)}

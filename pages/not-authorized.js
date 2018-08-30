@@ -4,7 +4,7 @@ export default () => (
   <Layout>
     <main>
       <h1>Open Budget WebClient</h1>
-      <p>Login failed</p>
+      <p>Login failed or missing permissions</p>
     </main>
   </Layout>
 )

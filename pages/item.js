@@ -3,6 +3,7 @@ import camelCase from 'lodash.camelcase'
 import React from 'react'
 
 import { default as jsonApi } from '../src/api'
+import { READ } from '../src/auth/roles'
 import { default as Layout } from '../src/components/layout/Layout'
 import { default as toForm } from '../src/converters/to-form'
 import { schemas, setModels, defaultIncludes, defaultValues } from '../src/models'
@@ -25,6 +26,7 @@ export class Item extends React.Component {
     debug(schema)
     debug('schema ends')
     return {
+      action: READ,
       apiOptions,
       camelCaseEntity,
       entity,
@@ -37,7 +39,7 @@ export class Item extends React.Component {
   }
 
   componentDidMount () {
-    setModels[this.props.entity]()
+    setModels[this.props.camelCaseEntity]()
   }
 
   render () {

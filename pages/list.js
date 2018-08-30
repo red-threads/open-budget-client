@@ -7,6 +7,7 @@ import React from 'react'
 import { merge } from 'timm'
 
 import { findOneOrAll } from '../src/api'
+import { LIST } from '../src/auth/roles'
 import Layout from '../src/components/layout/Layout'
 import { schemaDescriptions, setModels, defaultIncludes, fieldsLists } from '../src/models'
 import withAuth from '../src/auth/withAuth'
@@ -25,7 +26,7 @@ export class List extends React.Component {
       include ? { include } : {}
     )
     return {
-      action: 'list',
+      action: LIST,
       entity,
       camelCaseEntity,
       fieldsList,
@@ -35,6 +36,10 @@ export class List extends React.Component {
       }).then(({ data }) => data),
       schema
     }
+  }
+
+  componentDidMount () {
+    setModels[this.props.camelCaseEntity]()
   }
 
   render () {
