@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.6.0"></a>
+# [0.6.0](https://github.com/red-threads/open-budget-client/compare/v0.5.0...v0.6.0) (2018-08-30)
+
+
+### Bug Fixes
+
+* lint issues ([e4c58da](https://github.com/red-threads/open-budget-client/commit/e4c58da))
+
+
+### Features
+
+* add auth0 logo ([63b68fe](https://github.com/red-threads/open-budget-client/commit/63b68fe))
+* define role-based authentication ([3d1d590](https://github.com/red-threads/open-budget-client/commit/3d1d590))
+* simplify local development ([380960a](https://github.com/red-threads/open-budget-client/commit/380960a))
+
+
+
 <a name="0.5.0"></a>
 # [0.5.0](https://github.com/red-threads/open-budget-client/compare/v0.4.0...v0.5.0) (2018-08-10)
 
