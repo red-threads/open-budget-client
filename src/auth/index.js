@@ -61,9 +61,11 @@ export function getAccessToken () {
 }
 
 export function getProfile () {
-  let accessToken = getAccessToken()
   return new Promise((resolve, reject) => {
-    getProvider().client.userInfo(accessToken, (err, profile) => {
+    if (process.env.IS_LOCAL) {
+      return resolve(JSON.parse(global.localStorage.getItem('profile')))
+    }
+    getProvider().client.userInfo(getAccessToken(), (err, profile) => {
       console.log('profile!')
       console.log(profile)
       if (err) {
