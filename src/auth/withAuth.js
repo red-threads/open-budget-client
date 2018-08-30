@@ -47,7 +47,7 @@ export default function withAuth (Page) {
       }
     }
 
-    checkRole(props) {
+    checkRole (props) {
       return Roles.check(props, this.state.profile)
     }
 

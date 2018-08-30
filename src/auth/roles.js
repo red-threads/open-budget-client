@@ -56,15 +56,15 @@ export const ALL = '*'
  * }
  **/
 // Build roles
-export function role(action, specifier) {
+export function role (action, specifier) {
   return `${action}:${specifier}`
 }
 
-function roleHasPropertyOrWildcard(roleValue, valueToFind) {
+function roleHasPropertyOrWildcard (roleValue, valueToFind) {
   return roleValue === valueToFind || roleValue === '*'
 }
 
-export function check({ action, entity, id, initialData, onDemand = false }, availableRoles) {
+export function check ({ action, entity, id, initialData, onDemand = false }, availableRoles) {
   // 1. check action
   const applicableRoles = availableRoles[action]
   if (!applicableRoles || applicableRoles.length === 0) {
