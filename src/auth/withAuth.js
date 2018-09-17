@@ -1,7 +1,11 @@
+import Debug from 'debug'
 import Router from 'next/router'
 import * as React from 'react'
+import { merge } from 'timm'
 import * as Auth from './index'
 import * as Roles from './roles'
+
+const debug = Debug('ob:c:auth:hoc-with-auth')
 
 function getDisplayName (Component) {
   return Component.displayName || Component.name || 'Unknown'
@@ -30,8 +34,11 @@ export default function withAuth (Page) {
 
     componentDidMount () {
       const isAuthenticated = Auth.isAuthenticated()
+      debug('cdm')
+      debug(isAuthenticated)
       if (isAuthenticated) {
         Auth.getProfile().then(profile => {
+          debug('gotProfile', profile)
           this.setState({
             hasChecked: true,
             isAuthenticated,
@@ -48,24 +55,30 @@ export default function withAuth (Page) {
     }
 
     checkRole (props) {
+      debug('checkRole')
       return Roles.check(props, this.state.profile)
     }
 
     render () {
+      debug('render')
+      debug('hasChecked', this.state.hasChecked)
       if (!this.state.hasChecked) {
         return (
           <div>Authenticating...</div>
         )
       }
-      if (!this.state.isAuthenticated) {
-        Router.replace('/login')
-        return null
-      }
-      console.log('render', this.state.profile)
-      if (!this.checkRole(this.props)) {
-        console.log('render auth fail')
-        Router.push('/not-authorized')
-        return null
+      if (!this.props.isPublic) {
+        debug('isAuth', this.state.isAuthenticated)
+        if (!this.state.isAuthenticated) {
+          Router.replace('/login')
+          return null
+        }
+        debug('profile', this.state.profile)
+        if (!this.checkRole(this.props)) {
+          debug('render auth fail')
+          Router.push('/not-authorized')
+          return null
+        }
       }
       return (
         <Page {...this.props} userProfile={this.state.profile} onDemandRoleCheck={props => this.checkRole(props)} />
