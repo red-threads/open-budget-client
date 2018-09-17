@@ -43,8 +43,8 @@ export class List extends React.Component {
   }
 
   render () {
-    const { entity, errors, fieldsList, initialData, schema } = this.props
-    console.log(this.props.userProfile)
+    const { entity, errors, fieldsList, initialData, schema, userProfile } = this.props
+    debug(userProfile)
     debug(entity)
     debug(errors)
     debug(schema)

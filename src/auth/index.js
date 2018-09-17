@@ -1,13 +1,15 @@
 import Auth0 from 'auth0-js'
+import Debug from 'debug'
 import Router from 'next/router'
 
+const debug = Debug('ob:c:auth:index')
 let provider
 function getProvider () {
   if (!provider) {
+    debug(`${window.location.origin}/callback-auth0`)
     provider = new Auth0.WebAuth({
       domain: process.env.AUTH0_DOMAIN,
       clientID: process.env.AUTH0_CLIENT_ID,
-      redirectUri: `${window.location.origin}/callback-auth0`,
       audience: `https://${process.env.AUTH0_DOMAIN}/userinfo`,
       responseType: 'token id_token',
       scope: 'openid profile'
@@ -63,8 +65,10 @@ export function getAccessToken () {
 export function getProfile () {
   return new Promise((resolve, reject) => {
     if (process.env.IS_LOCAL) {
+      debug('will go local')
       return resolve(JSON.parse(global.localStorage.getItem('profile')))
     }
+    debug('will fetch remote profile')
     getProvider().client.userInfo(getAccessToken(), (err, profile) => {
       console.log('profile!')
       console.log(profile)
