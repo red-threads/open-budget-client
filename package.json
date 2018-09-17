@@ -52,6 +52,7 @@
     "path-match": "^1.2.4",
     "pluralize": "^7.0.0",
     "react": "^16.4.1",
+    "react-csv-reader": "^0.3.2",
     "react-dom": "^16.4.1",
     "react-jsonschema-form": "^1.0.3",
     "react-s-alert": "^1.4.1",

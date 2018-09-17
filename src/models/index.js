@@ -1,3 +1,4 @@
+import entities from './entities.json'
 import { schema as cardSchema } from '@red-threads/open-budget-api/src/card/schema'
 import { schema as organizationSchema } from '@red-threads/open-budget-api/src/organization/schema'
 import { schema as transactionSchema } from '@red-threads/open-budget-api/src/transaction/schema'
@@ -27,6 +28,8 @@ import {
   fields as transactionTypeFields,
   fieldsList as transactionTypeFieldsList
 } from './transaction-type'
+
+export const entityNames = Object.values(entities)
 
 export const schemas = {
   card: cardSchema,

@@ -1,0 +1,14 @@
+{
+  "CSV": {
+    "id": "csv",
+    "mapTo": {
+      "transaction": {}
+    }
+  },
+  "Credit Card": {
+    "id": "cc",
+    "mapTo": {
+      "transaction": {}
+    }
+  }
+}
