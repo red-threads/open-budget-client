@@ -1,7 +1,7 @@
 import Layout from '../src/components/layout/Layout'
 
 export default () => (
-  <Layout isPublic>
+  <Layout>
     <main>
       <h1>Open Budget WebClient</h1>
       <p>Login failed or missing permissions</p>
