@@ -55,30 +55,28 @@ export default function withAuth (Page) {
     }
 
     checkRole (props) {
-      debug('checkRole')
+      debug('checkRole', props)
       return Roles.check(props, this.state.profile)
     }
 
     render () {
-      debug('render')
+      debug('render', this.props)
       debug('hasChecked', this.state.hasChecked)
       if (!this.state.hasChecked) {
         return (
           <div>Authenticating...</div>
         )
       }
-      if (!this.props.isPublic) {
-        debug('isAuth', this.state.isAuthenticated)
-        if (!this.state.isAuthenticated) {
-          Router.replace('/login')
-          return null
-        }
-        debug('profile', this.state.profile)
-        if (!this.checkRole(this.props)) {
-          debug('render auth fail')
-          Router.push('/not-authorized')
-          return null
-        }
+      debug('isAuth', this.state.isAuthenticated)
+      if (!this.state.isAuthenticated) {
+        Router.replace('/login')
+        return null
+      }
+      debug('profile', this.state.profile)
+      if (!this.checkRole(this.props)) {
+        debug('render auth fail')
+        Router.push('/not-authorized')
+        return null
       }
       return (
         <Page {...this.props} userProfile={this.state.profile} onDemandRoleCheck={props => this.checkRole(props)} />

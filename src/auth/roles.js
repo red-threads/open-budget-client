@@ -58,13 +58,22 @@ function roleHasPropertyOrWildcard (roleValue, valueToFind) {
 }
 
 export function check ({ action, entity, id, initialData, onDemand = false }, availableRoles) {
+  if (!action) {
+    console.error('Tried to check roles without an action set. Are you missing the "action" prop maybe?')
+    return false
+  }
+  if (!entity) {
+    console.error('Tried to check roles without an entity set. Are you missing the "entity" prop maybe?')
+    return false
+  }
   debug('check')
-  debug(action, entity, id)
+  debug('ac&en', action, entity)
+  debug(id)
   // 1. check action
   const applicableRoles = availableRoles[action]
-  debug('appl roles', applicableRoles)
+  debug('applicable roles', applicableRoles)
   if (!applicableRoles || applicableRoles.length === 0) {
-    console.error('No actions allowed')
+    console.error(`No actions allowed for the action ${action}`)
     return false
   }
   // 2. is this a create action? Then it's fine; we'll check the permissions later on form submit
@@ -76,7 +85,7 @@ export function check ({ action, entity, id, initialData, onDemand = false }, av
   const rolesByEntity = applicableRoles.filter(role => roleHasPropertyOrWildcard(role.entity, entity))
   debug('byEnt', rolesByEntity)
   if (rolesByEntity.length === 0) {
-    console.error('Entity does not match with any of the allowed one')
+    console.error(`No permission to perform action ${action} on entity ${entity}`)
     return false
   }
   // 4. check specific-id, any-id
