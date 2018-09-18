@@ -1,9 +1,8 @@
 import Link from 'next/link'
 import Head from 'next/head'
 import * as React from 'react'
-import withAuth from '../../auth/withAuth'
 
-export function Layout ({ children, title = 'Open Budget Client', onDemandRoleCheck }) {
+export function Layout ({ children, title = 'Open Budget Client' }) {
   return (
     <React.Fragment>
       <Head>
@@ -45,4 +44,4 @@ export function Layout ({ children, title = 'Open Budget Client', onDemandRoleCh
   )
 }
 
-export default withAuth(Layout)
+export default Layout
