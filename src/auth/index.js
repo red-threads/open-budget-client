@@ -5,12 +5,16 @@ import Router from 'next/router'
 const debug = Debug('ob:c:auth:index')
 let provider
 function getProvider () {
+  const audience = `https://${process.env.AUTH0_DOMAIN}/userinfo`
+  const redirectUri = `${global.location.origin}/callback-auth0`
   if (!provider) {
-    debug(`${window.location.origin}/callback-auth0`)
+    debug('redirectUri', redirectUri)
+    debug('audience', audience)
     provider = new Auth0.WebAuth({
-      domain: process.env.AUTH0_DOMAIN,
+      audience,
       clientID: process.env.AUTH0_CLIENT_ID,
-      audience: `https://${process.env.AUTH0_DOMAIN}/userinfo`,
+      domain: process.env.AUTH0_DOMAIN,
+      redirectUri,
       responseType: 'token id_token',
       scope: 'openid profile'
     })
@@ -22,7 +26,7 @@ export function login () {
   getProvider().authorize()
 }
 
-export function handleAuthentication () {
+export function handleAuthenticationCallback () {
   getProvider().parseHash((err, authResult) => {
     if (authResult && authResult.accessToken && authResult.idToken) {
       setSession(authResult)
@@ -34,7 +38,7 @@ export function handleAuthentication () {
   })
 }
 
-export function setSession (authResult) {
+function setSession (authResult) {
   let expiresAt = JSON.stringify((authResult.expiresIn * 1000) + new Date().getTime())
   global.localStorage.setItem('access_token', authResult.accessToken)
   global.localStorage.setItem('id_token', authResult.idToken)
@@ -54,7 +58,7 @@ export function isAuthenticated () {
   return new Date().getTime() < expiresAt
 }
 
-export function getAccessToken () {
+function getAccessToken () {
   const accessToken = global.localStorage.getItem('access_token')
   if (!accessToken) {
     throw new Error('No Access Token found')
@@ -66,7 +70,7 @@ export function getProfile () {
   return new Promise((resolve, reject) => {
     if (process.env.IS_LOCAL) {
       debug('will go local')
-      return resolve(JSON.parse(global.localStorage.getItem('profile')))
+      //return resolve(JSON.parse(global.localStorage.getItem('profile')))
     }
     debug('will fetch remote profile')
     getProvider().client.userInfo(getAccessToken(), (err, profile) => {

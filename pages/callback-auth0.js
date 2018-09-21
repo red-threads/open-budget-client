@@ -2,9 +2,9 @@ import Link from 'next/link'
 import React from 'react'
 import * as Auth from '../src/auth'
 
-export default class extends React.Component {
+export default class AuthenticationCallback extends React.Component {
   componentDidMount () {
-    Auth.handleAuthentication()
+    Auth.handleAuthenticationCallback()
   }
 
   render () {
