@@ -13,7 +13,6 @@ const ACCESS_TOKEN_KEY = 'access_token'
 const ID_TOKEN_KEY = 'id_token'
 const EXPIRES_AT_KEY = 'expires_at'
 
-
 function getProvider () {
   const audience = `https://${process.env.AUTH0_DOMAIN}/userinfo`
   const redirectUri = `${global.location.origin}/callback-auth0`
@@ -30,6 +29,10 @@ function getProvider () {
     })
   }
   return provider
+}
+
+function getNamespacedClaim(customClaim) {
+  return `${process.env.OIDC_NAMESPACE}/${customClaim}`
 }
 
 export function login () {
@@ -79,6 +82,7 @@ function getAccessToken () {
 
 export function getProfile () {
   return new Promise((resolve, reject) => {
+    debug('islocal?', process.env.IS_LOCAL)
     if (process.env.IS_LOCAL) {
       debug('will go local')
       return resolve(JSON.parse(global.localStorage.getItem('profile')))
@@ -89,7 +93,13 @@ export function getProfile () {
       if (err) {
         return reject(err)
       }
-      return resolve(profile)
+      const userRolesClaim = getNamespacedClaim('roles')
+      debug('claim', userRolesClaim)
+      debug('roles to return', profile[userRolesClaim])
+      if (!profile[userRolesClaim]) {
+        return reject(new Error(`Claim ${userRolesClaim} not found on the profile!`))
+      }
+      return resolve(profile[userRolesClaim])
     })
   })
 }

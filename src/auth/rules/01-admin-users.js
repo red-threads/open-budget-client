@@ -2,27 +2,72 @@ function adminRoles(user, context, callback) {
     function addRolesToUser(user, cb) {
     if (user.email && user.email.endsWith(process.env.ADMIN_EMAIL_DOMAIN)) {
       cb(null, {
-        list: {
-          card: '*',
-          home: '*',
-          organization: '*',
-          transaction: '*',
-          transactionType: '*'
-        },
-        read: {
-          card: '*',
-          home: '*',
-          organization: '*',
-          transaction: '*',
-          transactionType: '*'
-        },
-        update: {
-          card: '*',
-          home: '*',
-          organization: '*',
-          transaction: '*',
-          transactionType: '*'
-        }
+        list: [
+          {
+            entity: 'card',
+            id: '*'
+          },
+          {
+            entity: 'home',
+            id: '*'
+          },
+          {
+            entity: 'organization',
+            id: '*'
+          },
+          {
+            entity: 'transaction',
+            id: '*'
+          },
+          {
+            entity: 'transactionType',
+            id: '*'
+          }
+        ],
+        read: [
+          {
+            entity: 'card',
+            id: '*'
+          },
+          {
+            entity: 'home',
+            id: '*'
+          },
+          {
+            entity: 'organization',
+            id: '*'
+          },
+          {
+            entity: 'transaction',
+            id: '*'
+          },
+          {
+            entity: 'transactionType',
+            id: '*'
+          }
+        ],
+        update: [
+          {
+            entity: 'card',
+            id: '*'
+          },
+          {
+            entity: 'home',
+            id: '*'
+          },
+          {
+            entity: 'organization',
+            id: '*'
+          },
+          {
+            entity: 'transaction',
+            id: '*'
+          },
+          {
+            entity: 'transactionType',
+            id: '*'
+          }
+        ]
       })
     } else {
       cb(null, null)
