@@ -21,29 +21,29 @@ export default class UploadBatch extends React.Component {
     }
   }
 
-  onUploadSuccess(data) {
+  onUploadSuccess (data) {
     debug('success')
     debug(data)
     Alert.success('CSV read successfully!')
   }
 
-  onUploadFailure(error) {
+  onUploadFailure (error) {
     debug('error')
     Alert.error(`Failed uploading/reading CSV file: ${JSON.stringify(error)}`)
   }
 
-  render() {
+  render () {
     return (
       <Layout title='Upload CSV file'>
         <h1>Upload multiple {pluralize(this.props.entity)}</h1>
         <p>This page allows you to uplaod multiple transactions from a CSV file</p>
         <main>
           <CSVReader
-            cssClass="csv-input"
-            label="Select CSV with resources to batch-upload"
+            cssClass='csv-input'
+            label='Select CSV with resources to batch-upload'
             onFileLoaded={this.onUploadSuccess}
             onError={this.onUploadFailure}
-            inputId="batchOpsFile"
+            inputId='batchOpsFile'
           />
         </main>
       </Layout>

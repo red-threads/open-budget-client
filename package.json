@@ -72,7 +72,8 @@
       "ROLLBAR_TOKEN": "@rollbar-token",
       "NODE_ENV": "production",
       "AUTH0_DOMAIN": "@auth0-domain",
-      "AUTH0_CLIENT_ID": "@auth0-client-id"
+      "AUTH0_CLIENT_ID": "@auth0-client-id",
+      "OICD_NAMESPACE": "@oicd-namespace"
     }
   }
 }

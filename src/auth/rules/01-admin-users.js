@@ -1,5 +1,5 @@
-function adminRoles(user, context, callback) {
-    function addRolesToUser(user, cb) {
+function adminRoles (user, context, callback) {
+  function addRolesToUser (user, cb) {
     if (user.email && user.email.endsWith(process.env.ADMIN_EMAIL_DOMAIN)) {
       cb(null, {
         list: [
@@ -75,7 +75,7 @@ function adminRoles(user, context, callback) {
   }
   user.app_metadata = user.app_metadata || {}
 
-  addRolesToUser(user, function(err, roles) {
+  addRolesToUser(user, function (err, roles) {
     if (err) {
       callback(err)
     } else if (!roles) {
@@ -83,10 +83,10 @@ function adminRoles(user, context, callback) {
     } else {
       user.app_metadata.roles = roles
       auth0.users.updateAppMetadata(user.user_id, user.app_metadata)
-        .then(function(){
+        .then(function () {
           callback(null, user, context)
         })
-        .catch(function(err){
+        .catch(function (err) {
           callback(err)
         })
     }

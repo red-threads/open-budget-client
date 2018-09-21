@@ -31,7 +31,7 @@ function getProvider () {
   return provider
 }
 
-function getNamespacedClaim(customClaim) {
+function getNamespacedClaim (customClaim) {
   return `${process.env.OIDC_NAMESPACE}/${customClaim}`
 }
 
