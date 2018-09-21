@@ -4,6 +4,16 @@ import Router from 'next/router'
 
 const debug = Debug('ob:c:auth:index')
 let provider
+const ROUTES = {
+  LOGGED_IN: '/home',
+  LOGGED_OUT: '/',
+  UNAUTHORIZED: '/not-authorized'
+}
+const ACCESS_TOKEN_KEY = 'access_token'
+const ID_TOKEN_KEY = 'id_token'
+const EXPIRES_AT_KEY = 'expires_at'
+
+
 function getProvider () {
   const audience = `https://${process.env.AUTH0_DOMAIN}/userinfo`
   const redirectUri = `${global.location.origin}/callback-auth0`
@@ -15,7 +25,7 @@ function getProvider () {
       clientID: process.env.AUTH0_CLIENT_ID,
       domain: process.env.AUTH0_DOMAIN,
       redirectUri,
-      responseType: 'token id_token',
+      responseType: `token ${ID_TOKEN_KEY}`,
       scope: 'openid profile'
     })
   }
@@ -28,38 +38,39 @@ export function login () {
 
 export function handleAuthenticationCallback () {
   getProvider().parseHash((err, authResult) => {
+    debug('err', err)
+    debug('auth', authResult)
     if (authResult && authResult.accessToken && authResult.idToken) {
       setSession(authResult)
-      Router.replace('/home')
+      Router.replace(ROUTES.LOGGED_IN)
     } else if (err) {
-      Router.replace('/not-authorized')
-      console.log(err)
+      Router.replace(ROUTES.UNAUTHORIZED)
     }
   })
 }
 
 function setSession (authResult) {
   let expiresAt = JSON.stringify((authResult.expiresIn * 1000) + new Date().getTime())
-  global.localStorage.setItem('access_token', authResult.accessToken)
-  global.localStorage.setItem('id_token', authResult.idToken)
-  global.localStorage.setItem('expires_at', expiresAt)
-  Router.replace('/home')
+  global.localStorage.setItem(ACCESS_TOKEN_KEY, authResult.accessToken)
+  global.localStorage.setItem(ID_TOKEN_KEY, authResult.idToken)
+  global.localStorage.setItem(EXPIRES_AT_KEY, expiresAt)
+  Router.replace(ROUTES.LOGGED_IN)
 }
 
 export function logout () {
-  global.localStorage.removeItem('access_token')
-  global.localStorage.removeItem('id_token')
-  global.localStorage.removeItem('expires_at')
-  Router.replace('/')
+  global.localStorage.removeItem(ACCESS_TOKEN_KEY)
+  global.localStorage.removeItem(ID_TOKEN_KEY)
+  global.localStorage.removeItem(EXPIRES_AT_KEY)
+  Router.replace(ROUTES.LOGGED_OUT)
 }
 
 export function isAuthenticated () {
-  const expiresAt = JSON.parse(global.localStorage.getItem('expires_at'))
+  const expiresAt = JSON.parse(global.localStorage.getItem(EXPIRES_AT_KEY))
   return new Date().getTime() < expiresAt
 }
 
 function getAccessToken () {
-  const accessToken = global.localStorage.getItem('access_token')
+  const accessToken = global.localStorage.getItem(ACCESS_TOKEN_KEY)
   if (!accessToken) {
     throw new Error('No Access Token found')
   }
@@ -70,12 +81,11 @@ export function getProfile () {
   return new Promise((resolve, reject) => {
     if (process.env.IS_LOCAL) {
       debug('will go local')
-      //return resolve(JSON.parse(global.localStorage.getItem('profile')))
+      return resolve(JSON.parse(global.localStorage.getItem('profile')))
     }
     debug('will fetch remote profile')
     getProvider().client.userInfo(getAccessToken(), (err, profile) => {
-      console.log('profile!')
-      console.log(profile)
+      debug('profile!', profile)
       if (err) {
         return reject(err)
       }
