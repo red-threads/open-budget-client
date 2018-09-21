@@ -5,7 +5,7 @@ import Alert from 'react-s-alert'
 import pluralize from 'pluralize'
 
 import { BATCH } from '../src/auth/roles'
-import { default as Layout } from '../src/components/layout/Layout'
+import Layout from '../src/components/layout/Layout'
 
 const debug = Debug('ob:c:pages:upload-batch')
 

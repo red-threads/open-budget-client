@@ -2,10 +2,10 @@ import Debug from 'debug'
 import camelCase from 'lodash.camelcase'
 import React from 'react'
 
-import { default as jsonApi } from '../src/api'
+import jsonApi from '../src/api'
 import { READ } from '../src/auth/roles'
-import { default as Layout } from '../src/components/layout/Layout'
-import { default as toForm } from '../src/converters/to-form'
+import Layout from '../src/components/layout/Layout'
+import toForm from '../src/converters/to-form'
 import { schemas, setModels, defaultIncludes, defaultValues } from '../src/models'
 import withAuth from '../src/auth/withAuth'
 

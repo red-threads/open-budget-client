@@ -75,5 +75,11 @@
       "AUTH0_CLIENT_ID": "@auth0-client-id",
       "OICD_NAMESPACE": "@oicd-namespace"
     }
+  },
+  "standard": {
+    "ignore": [
+      "static/**",
+      "src/auth/rules/*.js"
+    ]
   }
 }

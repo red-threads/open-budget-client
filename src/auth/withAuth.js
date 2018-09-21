@@ -1,7 +1,6 @@
 import Debug from 'debug'
 import Router from 'next/router'
 import * as React from 'react'
-import { merge } from 'timm'
 import * as Auth from './index'
 import * as Roles from './roles'
 
