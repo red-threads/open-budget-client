@@ -2,6 +2,32 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.7.0"></a>
+# [0.7.0](https://github.com/red-threads/open-budget-client/compare/v0.6.0...v0.7.0) (2018-09-21)
+
+
+### Bug Fixes
+
+* add extra debug infos ([4c691d6](https://github.com/red-threads/open-budget-client/commit/4c691d6))
+* authentication handling, auth HOC debug ([105840b](https://github.com/red-threads/open-budget-client/commit/105840b))
+* use entity names from json config file ([140451f](https://github.com/red-threads/open-budget-client/commit/140451f))
+* **auth:** add auth0 rules, missing redirectUri ([1eb9c52](https://github.com/red-threads/open-budget-client/commit/1eb9c52))
+* **auth:** better debugging ([100ac83](https://github.com/red-threads/open-budget-client/commit/100ac83))
+* **auth:** clean up initial props ([c794b00](https://github.com/red-threads/open-budget-client/commit/c794b00))
+* **auth:** remove hardcoded strings, clean up ([f041346](https://github.com/red-threads/open-budget-client/commit/f041346))
+* **auth:** remove layout<>withAuth HOC coupling ([df31dd8](https://github.com/red-threads/open-budget-client/commit/df31dd8))
+* **auth:** update roles structure, return the right claim ([edb9ee3](https://github.com/red-threads/open-budget-client/commit/edb9ee3))
+
+
+### Features
+
+* **batch:** add batch types support via json file-based configuration ([eac24e7](https://github.com/red-threads/open-budget-client/commit/eac24e7))
+* **offline:** offline-friendly vendor libs ([6763a9c](https://github.com/red-threads/open-budget-client/commit/6763a9c))
+* offline-friendly vendors ([dd734ee](https://github.com/red-threads/open-budget-client/commit/dd734ee))
+* ping endpoint ([55eac76](https://github.com/red-threads/open-budget-client/commit/55eac76))
+
+
+
 <a name="0.6.0"></a>
 # [0.6.0](https://github.com/red-threads/open-budget-client/compare/v0.5.0...v0.6.0) (2018-08-30)
 

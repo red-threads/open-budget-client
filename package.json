@@ -1,6 +1,6 @@
 {
   "name": "@red-threads/open-budget-client",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "description": "Open Budget WebClient",
   "main": "pages/index.js",
   "engines": {
