@@ -7,7 +7,7 @@ import React from 'react'
 import { merge } from 'timm'
 
 import { findOneOrAll } from '../src/api'
-import { LIST } from '../src/auth/roles'
+import { LIST, CREATE } from '../src/auth/roles'
 import Layout from '../src/components/layout/Layout'
 import { schemaDescriptions, setModels, defaultIncludes, fieldsLists } from '../src/models'
 import withAuth from '../src/auth/withAuth'
@@ -56,8 +56,8 @@ export class List extends React.Component {
         <h1>List of {pluralize(entity)}</h1>
         <p>{schema.meta.description}</p>
         <main>
-          <table className='table'>
-            <thead>
+          <table className='table table-striped'>
+            <thead className='table-active'>
               <tr>
                 <th scope='col'>ID</th>
                 {
@@ -92,11 +92,23 @@ export class List extends React.Component {
               }
             </tbody>
             <tfoot>
-              <tr>
-                <td colSpan={fieldsList.length}>
-                  <Link href={`${entity}/new`}>
-                    <a>Add new</a>
-                  </Link>
+              <tr className='table-sm table-active text-right'>
+                <td colSpan={fieldsList.length + 1}>
+                  {this.props.onDemandRoleCheck({ ...this.props, action: CREATE }) && (
+                    <Link href={`${entity}/new`}>
+                      <a className='btn btn-sm btn-dark mx-2'>Add new</a>
+                    </Link>
+                  )}
+                  {this.props.onDemandRoleCheck({ ...this.props, action: 'batch_csv' }) && (
+                    <Link href={`/upload-batch/${entity}/csv`}>
+                      <a className='btn btn-sm btn-outline-dark mx-2'>Upload CSV batch</a>
+                    </Link>
+                  )}
+                  {this.props.onDemandRoleCheck({ ...this.props, action: 'batch_cc' }) && (
+                    <Link href={`/upload-batch/${entity}/cc`}>
+                      <a className='btn btn-sm btn-outline-dark mx-2 disabled' aria-disabled='true'>Upload CC batch</a>
+                    </Link>
+                  )}
                 </td>
               </tr>
             </tfoot>
