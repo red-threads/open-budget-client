@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.7.1"></a>
+## [0.7.1](https://github.com/red-threads/open-budget-client/compare/v0.7.0...v0.7.1) (2018-09-23)
+
+
+### Bug Fixes
+
+* index page styles ([34a68ca](https://github.com/red-threads/open-budget-client/commit/34a68ca))
+* lint issues ([4e64c8e](https://github.com/red-threads/open-budget-client/commit/4e64c8e))
+* **auth:** default admin roles and entity names ([c481c50](https://github.com/red-threads/open-budget-client/commit/c481c50))
+* **list:** add role-based action links ([266af5a](https://github.com/red-threads/open-budget-client/commit/266af5a))
+
+
+
 <a name="0.7.0"></a>
 # [0.7.0](https://github.com/red-threads/open-budget-client/compare/v0.6.0...v0.7.0) (2018-09-21)
 
