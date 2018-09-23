@@ -57,17 +57,17 @@ function roleHasPropertyOrWildcard (roleValue, valueToFind) {
   return roleValue === valueToFind || roleValue === ANY
 }
 
-export function check ({ action, entity, id, initialData, onDemand = false }, availableRoles) {
+export function check ({ action, camelCaseEntity, id, initialData, onDemand = false }, availableRoles) {
   if (!action) {
     console.error('Tried to check roles without an action set. Are you missing the "action" prop maybe?')
     return false
   }
-  if (!entity) {
-    console.error('Tried to check roles without an entity set. Are you missing the "entity" prop maybe?')
+  if (!camelCaseEntity) {
+    console.error('Tried to check roles without an entity set. Are you missing the "camelCaseEntity" prop maybe?')
     return false
   }
   debug('check')
-  debug('ac&en', action, entity)
+  debug('ac&en', action, camelCaseEntity)
   debug(id)
   // 1. check action
   const applicableRoles = availableRoles[action]
@@ -82,10 +82,10 @@ export function check ({ action, entity, id, initialData, onDemand = false }, av
     return true
   }
   // 3. exclude if the entity is not allowed
-  const rolesByEntity = applicableRoles.filter(role => roleHasPropertyOrWildcard(role.entity, entity))
+  const rolesByEntity = applicableRoles.filter(role => roleHasPropertyOrWildcard(role.entity, camelCaseEntity))
   debug('byEnt', rolesByEntity)
   if (rolesByEntity.length === 0) {
-    console.error(`No permission to perform action ${action} on entity ${entity}`)
+    console.error(`No permission to perform action ${action} on entity ${camelCaseEntity}`)
     return false
   }
   // 4. check specific-id, any-id

@@ -2,70 +2,86 @@ function adminRoles (user, context, callback) {
   function addRolesToUser (user, cb) {
     if (user.email && user.email.endsWith(process.env.ADMIN_EMAIL_DOMAIN)) {
       cb(null, {
-        list: [
+        "list": [
           {
-            entity: 'card',
-            id: '*'
+            "entity": "card",
+            "id": "*"
           },
           {
-            entity: 'home',
-            id: '*'
+            "entity": "home",
+            "id": "*"
           },
           {
-            entity: 'organization',
-            id: '*'
+            "entity": "organization",
+            "id": "*"
           },
           {
-            entity: 'transaction',
-            id: '*'
+            "entity": "transaction",
+            "id": "*"
           },
           {
-            entity: 'transactionType',
-            id: '*'
+            "entity": "transactionType",
+            "id": "*"
           }
         ],
-        read: [
+        "create": [
           {
-            entity: 'card',
-            id: '*'
+            "entity": "card",
+            "id": "*"
           },
           {
-            entity: 'home',
-            id: '*'
+            "entity": "organization",
+            "id": "*"
           },
           {
-            entity: 'organization',
-            id: '*'
+            "entity": "transaction",
+            "id": "*"
           },
           {
-            entity: 'transaction',
-            id: '*'
-          },
-          {
-            entity: 'transactionType',
-            id: '*'
+            "entity": "transactionType",
+            "id": "*"
           }
         ],
-        update: [
+        "read": [
           {
-            entity: 'card',
-            id: '*'
+            "entity": "card",
+            "id": "*"
           },
           {
-            entity: 'home',
-            id: '*'
+            "entity": "organization",
+            "id": "*"
           },
           {
-            entity: 'organization',
-            id: '*'
+            "entity": "transaction",
+            "id": "*"
           },
           {
-            entity: 'transaction',
-            id: '*'
+            "entity": "transactionType",
+            "id": "*"
+          }
+        ],
+        "update": [
+          {
+            "entity": "card",
+            "id": "*"
           },
           {
-            entity: 'transactionType',
-            id: '*'
+            "entity": "organization",
+            "id": "*"
+          },
+          {
+            "entity": "transaction",
+            "id": "*"
+          },
+          {
+            "entity": "transactionType",
+            "id": "*"
+          }
+        ],
+        "batch_csv": [
+          {
+            "entity": "transaction",
+            "id": "*"
           }
         ]
       })
