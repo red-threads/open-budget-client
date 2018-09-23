@@ -50,8 +50,8 @@ export class Item extends React.Component {
     debug(properties)
     return (
       <Layout title={`${action} ${entity}`}>
-        <h1><i>{data.name || data.organization}</i> {entity}</h1>
-        <dl>
+        <h1 className="display-4"><em>{data.name || data.organization}</em> {entity}</h1>
+        <dl className="my-4">
           {Object.entries(data).map(([key, value]) => (
             <div>
               <dt>{properties[key] && properties[key].title ? properties[key].title : key}</dt>

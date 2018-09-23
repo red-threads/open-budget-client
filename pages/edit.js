@@ -111,7 +111,7 @@ export class Edit extends React.Component {
     debug(schema.schema)
     return (
       <Layout title={`${action} ${entity}`}>
-        <h1>{action === CREATE ? `Create new` : `Update ${data.name || data.organization} ${entity}`}</h1>
+        <h1 className="display-4">{action === CREATE ? 'Create new' : 'Update'} <em>{data.name || data.organization}</em> {entity}</h1>
         <Form {...schema}
           formData={data}
           onSubmit={(...args) => this.onSubmit(...args)}

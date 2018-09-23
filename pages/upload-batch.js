@@ -35,17 +35,16 @@ export default class UploadBatch extends React.Component {
   render () {
     return (
       <Layout title='Upload CSV file'>
-        <h1>Upload multiple {pluralize(this.props.entity)}</h1>
-        <p>This page allows you to uplaod multiple transactions from a CSV file</p>
-        <main>
-          <CSVReader
-            cssClass='csv-input'
-            label='Select CSV with resources to batch-upload'
-            onFileLoaded={this.onUploadSuccess}
-            onError={this.onUploadFailure}
-            inputId='batchOpsFile'
-          />
-        </main>
+        <h1 className='display-4'>Upload multiple {pluralize(this.props.entity)}</h1>
+        <p className="lead">This page allows you to uplaod multiple transactions from a CSV file</p>
+        <hr className="my-4" />
+        <CSVReader
+          cssClass='csv-input'
+          label='Select CSV with resources to batch-upload'
+          onFileLoaded={this.onUploadSuccess}
+          onError={this.onUploadFailure}
+          inputId='batchOpsFile'
+        />
       </Layout>
     )
   }

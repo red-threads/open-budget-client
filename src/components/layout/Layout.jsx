@@ -2,7 +2,7 @@ import Link from 'next/link'
 import Head from 'next/head'
 import * as React from 'react'
 
-export function Layout ({ children, title = 'Open Budget Client' }) {
+export function Layout ({ children, title = 'Open Budget Client', className = '' }) {
   return (
     <React.Fragment>
       <Head>
@@ -18,7 +18,7 @@ export function Layout ({ children, title = 'Open Budget Client' }) {
       </Head>
       <header>
         <nav className='navbar navbar-expand-lg navbar-dark bg-dark'>
-          <Link href='#'>
+          <Link href='/home'>
             <a className='navbar-brand'>Home</a>
           </Link>
           <button className='navbar-toggler' type='button' data-toggle='collapse' data-target='#navbarNav' aria-controls='navbarNav' aria-expanded='false' aria-label='Toggle navigation'>
@@ -34,7 +34,7 @@ export function Layout ({ children, title = 'Open Budget Client' }) {
           </div>
         </nav>
       </header>
-      <main className='container py-4'>
+      <main className={`container my-4 ${className}`}>
         { children }
       </main>
       <footer className='container-fluid py-4 text-center text-small bg-light text-danger'>
