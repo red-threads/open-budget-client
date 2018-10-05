@@ -43,7 +43,7 @@ export class List extends React.Component {
   }
 
   render () {
-    const { entity, camelCaseEntity, errors, fieldsList, initialData, schema, userProfile } = this.props
+    const { entity, errors, fieldsList, initialData, schema, userProfile } = this.props
     debug(userProfile)
     debug(entity)
     debug(errors)
