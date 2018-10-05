@@ -2,13 +2,14 @@ import Debug from 'debug'
 import batchTypes from '../models/batchTypes.json'
 
 const debug = Debug('ob:c:auth:roles')
+debug(batchTypes)
 
 // Actions
 export const LIST = 'list'
 export const READ = 'read'
 export const CREATE = 'create'
 export const UPDATE = 'update'
-export const BATCH = Object.values(batchTypes).map(type => `batch_${type.id}`)
+export const BATCH = Object.keys(batchTypes).map(type => `batch_${type}`)
 
 // Specifiers
 export const ANY = '*'

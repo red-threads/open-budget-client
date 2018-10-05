@@ -7,7 +7,7 @@ const entities = require('./src/models/entities.json')
 const batchTypes = require('./src/models/batchTypes.json')
 
 const crudRoutes = Object.values(entities)
-const allowedBatchTYpes = Object.values(batchTypes).map(type => type.id)
+const allowedBatchTypes = Object.keys(batchTypes)
 const port = parseInt(process.env.PORT, 10) || 3000
 const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dev })
@@ -22,7 +22,7 @@ app.prepare()
       const editPage = route('/:entity/:id/edit')(pathname)
       const getPage = route('/:entity/:id')(pathname)
       const listPage = route('/:entity')(pathname)
-      const uploadBatch = route('/:upload-batch/:entity/:type')(pathname)
+      const uploadBatch = route('/upload-batch/:entity/:type')(pathname)
       const createOrEditPage = createPage || editPage
       const anyPage = createOrEditPage || getPage || listPage || uploadBatch
 
@@ -42,12 +42,9 @@ app.prepare()
         app.render(req, res, '/list', Object.assign({}, listPage, query))
         return
       }
-      if (uploadBatch && allowedBatchTYpes.includes(uploadBatch.type)) {
-        const batchToEntityMapper = Object.values(batchTypes).find(type => type.mapTo[uploadBatch.entity])
-        if (batchToEntityMapper) {
-          app.render(req, res, '/upload-batch', Object.assign({}, uploadBatch, query, {
-            mapper: batchToEntityMapper
-          }))
+      if (uploadBatch) {
+        if (allowedBatchTypes.includes(uploadBatch.type) && batchTypes[uploadBatch.type].mapTo.includes(uploadBatch.entity)) {
+          app.render(req, res, '/upload-batch', Object.assign({}, uploadBatch, query))
           return
         }
       }
