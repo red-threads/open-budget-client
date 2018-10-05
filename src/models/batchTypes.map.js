@@ -20,15 +20,15 @@ const mappers = {
       return Object.assign({
         createdAt: item.Date,
         gross,
-        "Payee": "",
-        "Account number": "",
-        "Transaction type": "",
-        "Payment reference": "",
-        "Category": "",
-        "Amount (EUR)": "",
-        "Amount (Foreign Currency)": "",
-        "Type Foreign Currency": "",
-        "Exchange Rate": ""
+        'Payee': '',
+        'Account number': '',
+        'Transaction type': '',
+        'Payment reference': '',
+        'Category': '',
+        'Amount (EUR)': '',
+        'Amount (Foreign Currency)': '',
+        'Type Foreign Currency': '',
+        'Exchange Rate': ''
       }, {
         [isComing ? 'from' : 'to']: payee
       })

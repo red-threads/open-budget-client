@@ -2,7 +2,7 @@ import Debug from 'debug'
 import batchTypes from '../../models/batchTypes.map'
 
 const debug = Debug('ob:c:comp:updload-batch-list')
-export default function UploadBatchList(props) {
+export default function UploadBatchList (props) {
   debug(props)
   if (props.items.length === 0) {
     return null

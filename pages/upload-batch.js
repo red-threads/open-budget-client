@@ -21,7 +21,7 @@ export default class UploadBatch extends React.Component {
     }
   }
 
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.state = {
       items: []
@@ -46,8 +46,8 @@ export default class UploadBatch extends React.Component {
     return (
       <Layout title='Upload CSV file'>
         <h1 className='display-4'>Upload multiple {pluralize(this.props.entity)}</h1>
-        <p className="lead">This page allows you to uplaod multiple {pluralize(this.props.entity)} from a CSV file</p>
-        <hr className="my-4" />
+        <p className='lead'>This page allows you to uplaod multiple {pluralize(this.props.entity)} from a CSV file</p>
+        <hr className='my-4' />
         { this.state.items.length === 0 && (
           <React.Fragment>
             <CSVReader
