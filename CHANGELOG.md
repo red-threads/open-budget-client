@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.8.0"></a>
+# [0.8.0](https://github.com/red-threads/open-budget-client/compare/v0.7.1...v0.8.0) (2018-10-05)
+
+
+### Bug Fixes
+
+* adjust/unify page header styles ([01ac79e](https://github.com/red-threads/open-budget-client/commit/01ac79e))
+* **home:** use camelCaseEntity ([59c095d](https://github.com/red-threads/open-budget-client/commit/59c095d))
+* **upload-batch:** lint ([ff9166d](https://github.com/red-threads/open-budget-client/commit/ff9166d))
+* **upload-batch:** typo ([6b0f967](https://github.com/red-threads/open-budget-client/commit/6b0f967))
+
+
+### Features
+
+* **batch-upload:** batch types configuration and transformation tryout ([3b919ee](https://github.com/red-threads/open-budget-client/commit/3b919ee))
+
+
+
 <a name="0.7.1"></a>
 ## [0.7.1](https://github.com/red-threads/open-budget-client/compare/v0.7.0...v0.7.1) (2018-09-23)
 
