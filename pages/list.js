@@ -53,8 +53,8 @@ export class List extends React.Component {
     }
     return (
       <Layout title='Organizations'>
-        <h1 className="display-4">List of {pluralize(StartCase(entity))}</h1>
-        <p className="lead">{schema.meta.description}</p>
+        <h1 className='display-4'>List of {pluralize(StartCase(entity))}</h1>
+        <p className='lead'>{schema.meta.description}</p>
         <table className='my-4 table table-striped'>
           <thead className='table-active'>
             <tr>
