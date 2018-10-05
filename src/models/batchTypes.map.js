@@ -30,7 +30,7 @@ const mappers = {
         'Type Foreign Currency': '',
         'Exchange Rate': ''
       }, {
-        [isComing ? 'from' : 'to']: payee
+        [isIncoming ? 'from' : 'to']: payee
       })
     }
   }
