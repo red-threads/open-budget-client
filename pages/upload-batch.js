@@ -48,7 +48,7 @@ export default class UploadBatch extends React.Component {
         <h1 className='display-4'>Upload multiple {pluralize(this.props.entity)}</h1>
         <p className='lead'>This page allows you to uplaod multiple {pluralize(this.props.entity)} from a CSV file</p>
         <hr className='my-4' />
-        { this.state.items.length === 0 && (
+        { this.state.items.length === 0 ? (
           <React.Fragment>
             <CSVReader
               cssClass='csv-input'
@@ -61,8 +61,9 @@ export default class UploadBatch extends React.Component {
               }}
             />
           </React.Fragment>
+        ) : (
+          <UploadBatchList entity={this.props.entity} items={this.state.items} type={this.props.type} />
         )}
-        <UploadBatchList entity={this.props.entity} items={this.state.items} type={this.props.type} />
       </Layout>
     )
   }
