@@ -1,7 +1,10 @@
+import Debug from 'debug'
 import JsonApi from 'devour-client'
+import qs from 'qs'
 
 import Rollbar from './rollbar'
 
+const debug = Debug('ob:c:api')
 const rollbar = Rollbar()
 
 const jsonApi = new JsonApi({
@@ -24,6 +27,13 @@ jsonApi.replaceMiddleware('errors', {
     }
   }
 })
+jsonApi.insertMiddlewareBefore('axios-request', {
+  name: 'unescape-filter',
+  req: payload => {
+    payload.req.paramsSerializer = params => qs.stringify(params, { encode: false })
+    return payload
+  }
+})
 
 export function findOneOrAll ({ entity, id, options }) {
   if (id) {
@@ -31,5 +41,7 @@ export function findOneOrAll ({ entity, id, options }) {
   }
   return jsonApi.findAll(entity, options)
 }
+
+export const update = jsonApi.update
 
 export default jsonApi
