@@ -3,6 +3,8 @@ import Debug from 'debug'
 import Router from 'next/router'
 
 const debug = Debug('ob:c:auth:index')
+export let scopes = ''
+export let authHeader = ''
 let provider
 const ROUTES = {
   LOGGED_IN: '/home',
@@ -31,11 +33,17 @@ function getProvider () {
   return provider
 }
 
-function getNamespacedClaim (customClaim) {
-  return `${process.env.OIDC_NAMESPACE}/${customClaim}`
-}
-
 export function login () {
+  if (process.env.IS_LOCAL) {
+    setSession({
+      accessToken: process.env.LOCAL_ACCESS_TOKEN,
+      idToken: process.env.LOCAL_ID_TOKEN,
+      expiresIn: 86400,
+      scope: process.env.LOCAL_SCOPES
+    })
+    Router.replace(ROUTES.LOGGED_IN)
+    return
+  }
   getProvider().authorize()
 }
 
@@ -53,53 +61,24 @@ export function handleAuthenticationCallback () {
 }
 
 function setSession (authResult) {
-  let expiresAt = JSON.stringify((authResult.expiresIn * 1000) + new Date().getTime())
+  const expiresIn = JSON.stringify((authResult.expiresIn * 1000) + new Date().getTime())
   global.localStorage.setItem(ACCESS_TOKEN_KEY, authResult.accessToken)
   global.localStorage.setItem(ID_TOKEN_KEY, authResult.idToken)
-  global.localStorage.setItem(EXPIRES_AT_KEY, expiresAt)
-  Router.replace(ROUTES.LOGGED_IN)
+  global.localStorage.setItem(EXPIRES_AT_KEY, expiresIn)
+  scopes = authResult.scope.split(' ')
+  authHeader = `${authResult.tokenType} ${authResult.idToken}`
 }
 
 export function logout () {
   global.localStorage.removeItem(ACCESS_TOKEN_KEY)
   global.localStorage.removeItem(ID_TOKEN_KEY)
   global.localStorage.removeItem(EXPIRES_AT_KEY)
+  scopes = ''
+  authHeader = ''
   Router.replace(ROUTES.LOGGED_OUT)
 }
 
 export function isAuthenticated () {
   const expiresAt = JSON.parse(global.localStorage.getItem(EXPIRES_AT_KEY))
   return new Date().getTime() < expiresAt
-}
-
-function getAccessToken () {
-  const accessToken = global.localStorage.getItem(ACCESS_TOKEN_KEY)
-  if (!accessToken) {
-    throw new Error('No Access Token found')
-  }
-  return accessToken
-}
-
-export function getProfile () {
-  return new Promise((resolve, reject) => {
-    debug('islocal?', process.env.IS_LOCAL)
-    if (process.env.IS_LOCAL) {
-      debug('will go local')
-      return resolve(JSON.parse(global.localStorage.getItem('profile')))
-    }
-    debug('will fetch remote profile')
-    getProvider().client.userInfo(getAccessToken(), (err, profile) => {
-      debug('profile!', profile)
-      if (err) {
-        return reject(err)
-      }
-      const userRolesClaim = getNamespacedClaim('roles')
-      debug('claim', userRolesClaim)
-      debug('roles to return', profile[userRolesClaim])
-      if (!profile[userRolesClaim]) {
-        return reject(new Error(`Claim ${userRolesClaim} not found on the profile!`))
-      }
-      return resolve(profile[userRolesClaim])
-    })
-  })
 }

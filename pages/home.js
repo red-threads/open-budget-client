@@ -7,7 +7,7 @@ export class Home extends React.Component {
   static async getInitialProps () {
     return {
       action: LIST,
-      camelCaseEntity: 'home'
+      entity: 'home'
     }
   }
 
@@ -16,7 +16,7 @@ export class Home extends React.Component {
       <Layout>
         <main>
           <h1>Open Budget WebClient</h1>
-          <p>Welcome {JSON.stringify(this.props.userProfile)}!</p>
+          <p>Welcome {JSON.stringify(this.props.userScopes)}!</p>
         </main>
       </Layout>
     )

@@ -19,7 +19,8 @@ export default function withAuth (Page) {
       this.state = {
         isAuthenticated: false,
         hasChecked: false,
-        profile: {}
+        scopes: [],
+        authHeader: ''
       }
     }
 
@@ -36,26 +37,25 @@ export default function withAuth (Page) {
       debug('cdm')
       debug(isAuthenticated)
       if (isAuthenticated) {
-        Auth.getProfile().then(profile => {
-          debug('gotProfile', profile)
-          this.setState({
-            hasChecked: true,
-            isAuthenticated,
-            profile
-          })
+        this.setState({
+          hasChecked: true,
+          isAuthenticated,
+          scopes: Auth.scopes,
+          authHeader: Auth.authHeader
         })
       } else {
         this.setState({
           hasChecked: true,
           isAuthenticated,
-          profile: null
+          scopes: [],
+          authHeader: ''
         })
       }
     }
 
     checkRole (props) {
       debug('checkRole', props)
-      return Roles.check(props, this.state.profile)
+      return Roles.check(props, this.state.scopes)
     }
 
     render () {
@@ -68,17 +68,18 @@ export default function withAuth (Page) {
       }
       debug('isAuth', this.state.isAuthenticated)
       if (!this.state.isAuthenticated) {
+        debug('NOT AUTHENTICATED')
         Router.replace('/login')
         return null
       }
-      debug('profile', this.state.profile)
+      debug('scopes', this.state.scopes)
       if (!this.checkRole(this.props)) {
         debug('render auth fail')
         Router.push('/not-authorized')
         return null
       }
       return (
-        <Page {...this.props} userProfile={this.state.profile} onDemandRoleCheck={props => this.checkRole(props)} />
+        <Page {...this.props} userScopes={this.state.scopes} onDemandRoleCheck={props => this.checkRole(props)} />
       )
     }
   }
