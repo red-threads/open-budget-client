@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.9.0"></a>
+# [0.9.0](https://github.com/red-threads/open-budget-client/compare/v0.8.0...v0.9.0) (2018-10-28)
+
+
+### Bug Fixes
+
+* **api:** unescape filter QS parameter ([edcd654](https://github.com/red-threads/open-budget-client/commit/edcd654))
+* **auth:** simplify authentication logic ([b1f173d](https://github.com/red-threads/open-budget-client/commit/b1f173d))
+* **upload-batch:** either show file input or batch list ([f8e57fa](https://github.com/red-threads/open-budget-client/commit/f8e57fa))
+
+
+### Features
+
+* **auth:** secure API, update withAuth HOC ([77192aa](https://github.com/red-threads/open-budget-client/commit/77192aa))
+* **upload-batch:** first rough implementation ([b9424fa](https://github.com/red-threads/open-budget-client/commit/b9424fa))
+* **upload-batch:** show batch list ([2d043b0](https://github.com/red-threads/open-budget-client/commit/2d043b0))
+
+
+
 <a name="0.8.0"></a>
 # [0.8.0](https://github.com/red-threads/open-budget-client/compare/v0.7.1...v0.8.0) (2018-10-05)
 
