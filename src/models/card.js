@@ -15,5 +15,5 @@ export const fieldsList = [
 ]
 
 export function setModel () {
-  jsonApi.define(name, fields)
+  jsonApi().define(name, fields)
 }

@@ -23,5 +23,5 @@ export function setModel () {
   setOrgModel()
   setTransactionTypeModel()
 
-  jsonApi.define(name, fields)
+  jsonApi().define(name, fields)
 }

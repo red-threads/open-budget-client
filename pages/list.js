@@ -15,7 +15,8 @@ import withAuth from '../src/auth/withAuth'
 const debug = Debug('ob:c:pages:list')
 
 export class List extends React.Component {
-  static async getInitialProps ({ query: { entity } }) {
+  static async getInitialProps (ctx) {
+    const { query: { entity } } = ctx
     const camelCaseEntity = camelCase(entity)
     setModels[camelCaseEntity]()
     const schema = schemaDescriptions[camelCaseEntity]
@@ -25,15 +26,21 @@ export class List extends React.Component {
     const options = Object.assign({},
       include ? { include } : {}
     )
+    let initialData
+    try {
+      ({ data: initialData } = await findOneOrAll({
+        entity,
+        options
+      }, ctx))
+    } catch ({ errors: [ error ] }) {
+      throw new Error(error)
+    }
     return {
       action: LIST,
       entity,
       camelCaseEntity,
       fieldsList,
-      initialData: await findOneOrAll({
-        entity,
-        options
-      }).then(({ data }) => data),
+      initialData,
       schema
     }
   }

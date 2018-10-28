@@ -16,5 +16,5 @@ export const fieldsList = [
 export function setModel () {
   setCardModel()
 
-  jsonApi.define(name, fields)
+  jsonApi().define(name, fields)
 }

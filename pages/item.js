@@ -12,7 +12,8 @@ import withAuth from '../src/auth/withAuth'
 const debug = Debug('ob:c:pages:item')
 
 export class Item extends React.Component {
-  static async getInitialProps ({ query: { id, entity } }) {
+  static async getInitialProps (ctx) {
+    const { query: { entity, id } } = ctx
     debug('gip', id)
     debug('entity', entity)
     const camelCaseEntity = camelCase(entity)
@@ -32,7 +33,7 @@ export class Item extends React.Component {
       entity,
       id,
       initialData: id
-        ? await jsonApi.find(camelCaseEntity, id, apiOptions)
+        ? await jsonApi(ctx).find(camelCaseEntity, id, apiOptions)
         : defaultValues,
       schema
     }
