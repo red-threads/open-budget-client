@@ -10,7 +10,7 @@ const debug = Debug('ob:c:api')
 const rollbar = Rollbar()
 let jsonApi
 
-export default function getClient(ctx) {
+export default function getClient (ctx) {
   if (!jsonApi) {
     jsonApi = new JsonApi({
       apiUrl: process.env.API_URL
@@ -64,6 +64,6 @@ export function findOneOrAll ({ entity, id, options }, ctx) {
   return jsonApi.findAll(entity, options)
 }
 
-export function update({ entityName, resource }, ctx) {
+export function update ({ entityName, resource }, ctx) {
   return getClient(ctx).update(entityName, resource)
 }

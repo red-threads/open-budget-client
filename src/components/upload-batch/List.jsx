@@ -6,13 +6,13 @@ import batchTypes from '../../models/batchTypes.map'
 
 const debug = Debug('ob:c:comp:updload-batch-list')
 export default class UploadBatchList extends React.Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.state = {
       items: []
     }
   }
-  async componentDidMount() {
+  async componentDidMount () {
     const { type, entity, items } = this.props
     if (!type || !entity || !items) {
       debug('CDM: missing type, entity, items', type, entity, items)
@@ -28,7 +28,7 @@ export default class UploadBatchList extends React.Component {
       })
     }
   }
-  render() {
+  render () {
     const { items } = this.state
     debug('render items', items)
     if (items.length === 0) {
@@ -38,10 +38,10 @@ export default class UploadBatchList extends React.Component {
       <table className='my-4 table table-striped'>
         <thead className='table-active'>
           <tr>
-            <th scope="col">Type</th>
-            <th scope="col">API status</th>
-            <th scope="col">Name</th>
-            <th scope="col">Depends on</th>
+            <th scope='col'>Type</th>
+            <th scope='col'>API status</th>
+            <th scope='col'>Name</th>
+            <th scope='col'>Depends on</th>
           </tr>
         </thead>
         <tbody>
@@ -60,7 +60,7 @@ export default class UploadBatchList extends React.Component {
                 </td>
                 <td>{item.dependsOn.map((dependency = {}) => (
                   <Link href={`#${dependency.id}`}>
-                    <a>{dependecy.name}</a>
+                    <a>{dependency.name}</a>
                   </Link>
                 ))}</td>
               </tr>

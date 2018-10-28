@@ -55,13 +55,13 @@ export default function withAuth (Page) {
       return `WithAuth(${childComponentName})`
     }
 
-    componentDidCatch(error, info) {
+    componentDidCatch (error, info) {
       debug('cdc')
       debug(error)
       debug(info)
     }
 
-    static getDerivedStateFromError(error) {
+    static getDerivedStateFromError (error) {
       return { hasError: true, error }
     }
 

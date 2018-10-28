@@ -4,8 +4,8 @@ import batchTypes from './batchTypes.json'
 import { findOneOrAll, update } from '../api'
 
 const debug = Debug('ob:c:models:batchTypes:map')
-function getLocalUuid() {
-  const id = btoa(Math.floor(Math.random()*1000))
+function getLocalUuid () {
+  const id = global.btoa(Math.floor(Math.random() * 1000))
   return `${new Date().getTime()}-${id}`
 }
 const mappers = {

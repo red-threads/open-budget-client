@@ -89,13 +89,13 @@ function setSession (authResult, { clear = false } = {}) {
   global.localStorage.setItem(AUTH_SESSION_KEY, JSON.stringify(session))
 }
 
-export function getSession(key, ctx) {
+export function getSession (key, ctx) {
   debug('getSession')
   if (!session.authHeader) {
     debug('no in-memory session header')
-    session = typeof global.localStorage !== 'undefined' ?
-      JSON.parse(global.localStorage.getItem(AUTH_SESSION_KEY)) : 
-      {
+    session = typeof global.localStorage !== 'undefined'
+      ? JSON.parse(global.localStorage.getItem(AUTH_SESSION_KEY))
+      : {
         authHeader: getAuthHeaderCookie(ctx)
       }
     debug('now there is', session)
@@ -108,7 +108,7 @@ export function logout () {
   Router.replace(ROUTES.LOGGED_OUT)
 }
 
-export function getAuthHeaderCookie(ctx = {}) {
+export function getAuthHeaderCookie (ctx = {}) {
   if (!authHeaderCookie) {
     authHeaderCookie = getCookie(COOKIE_AUTH_HEADER_KEY, ctx.req)
   }
