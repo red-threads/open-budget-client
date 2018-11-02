@@ -140,7 +140,9 @@ async function getField (field) {
     objectSchema,
     dateSchema
   )
-  const uiSchema = Object.assign({},
+  const uiSchema = Object.assign({
+    'ui:description': (field.meta || {}).description
+  },
     arrayUiSchema,
     objectUiSchema,
     dateUiSchema
