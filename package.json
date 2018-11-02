@@ -10,7 +10,7 @@
   "scripts": {
     "build": "next build",
     "deploy": "now --public && now alias && now rm @red-threads/open-budget-client -sy",
-    "dev": "DEBUG=ob:* node --inspect server.js",
+    "dev": "DEBUG=ob:* node --inspect=9230 server.js",
     "jest": "NODE_ENV=test jest",
     "lint": "standard --fix",
     "postrelease": "run-p push-tags deploy",
