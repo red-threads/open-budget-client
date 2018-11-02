@@ -98,7 +98,7 @@ const mappers = {
       return [
         card,
         {
-          dependsOn: [{ id: card.localUuid, name: card.resource.name }],
+          dependsOn: [{ entityName: card.entityName, id: card.localUuid, name: card.resource.name }],
           didUpdateRemote: false,
           entityName,
           hasMultipleChoices: false,

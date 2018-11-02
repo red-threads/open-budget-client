@@ -40,7 +40,7 @@ export default class UploadBatchList extends React.Component {
           <tr>
             <th scope='col'>Type</th>
             <th scope='col'>API status</th>
-            <th scope='col'>Name</th>
+            <th scope='col'>Resource</th>
             <th scope='col'>Depends on</th>
           </tr>
         </thead>
@@ -60,7 +60,7 @@ export default class UploadBatchList extends React.Component {
                 </td>
                 <td>{item.dependsOn.map((dependency = {}) => (
                   <Link href={`#${dependency.id}`}>
-                    <a>{dependency.name}</a>
+                    <a>{dependency.name} (<em>{dependency.entityName}</em>)</a>
                   </Link>
                 ))}</td>
               </tr>
