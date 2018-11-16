@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.10.0"></a>
+# [0.10.0](https://github.com/red-threads/open-budget-client/compare/v0.9.3...v0.10.0) (2018-11-16)
+
+
+### Bug Fixes
+
+* **upload-batch:** expose dependency type ([b51da5f](https://github.com/red-threads/open-budget-client/commit/b51da5f))
+* expose inspector on a different port ([5de4c9b](https://github.com/red-threads/open-budget-client/commit/5de4c9b))
+* ignore file ([521320a](https://github.com/red-threads/open-budget-client/commit/521320a))
+* include description on UI JSON schema ([ec2d9fd](https://github.com/red-threads/open-budget-client/commit/ec2d9fd))
+* **upload-batch:** replace with more generic implementation ([92b1df6](https://github.com/red-threads/open-budget-client/commit/92b1df6))
+* lint ([dd3d85d](https://github.com/red-threads/open-budget-client/commit/dd3d85d))
+
+
+### Features
+
+* **flow:** introduce basic flow support ([1fe9505](https://github.com/red-threads/open-budget-client/commit/1fe9505))
+
+
+
 <a name="0.9.3"></a>
 ## [0.9.3](https://github.com/red-threads/open-budget-client/compare/v0.9.2...v0.9.3) (2018-10-28)
 
