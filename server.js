@@ -4,7 +4,7 @@ const { parse } = require('url')
 const next = require('next')
 const pathMatch = require('path-match')
 const entities = require('./src/models/entities.json')
-const batchTypes = require('./src/models/batchTypes.json')
+const batchTypes = require('./src/dedupe/configuration.json')
 
 const crudRoutes = Object.values(entities)
 const allowedBatchTypes = Object.keys(batchTypes)
@@ -43,7 +43,7 @@ app.prepare()
         return
       }
       if (uploadBatch) {
-        if (allowedBatchTypes.includes(uploadBatch.type) && batchTypes[uploadBatch.type].mapTo.includes(uploadBatch.entity)) {
+        if (allowedBatchTypes.includes(uploadBatch.type) && batchTypes[uploadBatch.type].entities[uploadBatch.entity]) {
           app.render(req, res, '/upload-batch', Object.assign({}, uploadBatch, query))
           return
         }

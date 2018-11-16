@@ -59,7 +59,7 @@ export class Edit extends React.Component {
         data: formData
       }
     })
-    if (!this.onDemandRoleCheck(nextProps)) {
+    if (!this.props.onDemandRoleCheck(nextProps)) {
       Alert.error('Not enough permissions to do this')
       errors.id.addError('Role check failed. Insufficient permissions')
       return errors

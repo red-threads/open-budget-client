@@ -5,7 +5,7 @@ import Alert from 'react-s-alert'
 import pluralize from 'pluralize'
 
 import { BATCH } from '../src/auth/roles'
-import UploadBatchList from '../src/components/upload-batch/List'
+import DedupedList from '../src/dedupe/List'
 import Layout from '../src/components/layout/Layout'
 
 const debug = Debug('ob:c:pages:upload-batch')
@@ -62,7 +62,7 @@ export default class UploadBatch extends React.Component {
             />
           </React.Fragment>
         ) : (
-          <UploadBatchList entity={this.props.entity} items={this.state.items} type={this.props.type} />
+          <DedupedList entity={this.props.entity} items={this.state.items} type={this.props.type} />
         )}
       </Layout>
     )

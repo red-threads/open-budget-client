@@ -1,5 +1,5 @@
 import Debug from 'debug'
-import batchTypes from '../models/batchTypes.json'
+import batchTypes from '../dedupe/configuration.json'
 
 const debug = Debug('ob:c:auth:roles')
 debug('batch types', batchTypes)

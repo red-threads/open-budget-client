@@ -1,0 +1,27 @@
+{
+  "csv": {
+    "id": "csv",
+    "name": "CSV",
+    "entities": {
+      "transaction": {
+        "name": "transaction",
+        "dependencies": [
+          "card"
+        ],
+        "searchOnServer": false,
+        "mergeOperation": "pick-client"
+      },
+      "card": {
+        "name": "card",
+        "dependencies": [],
+        "searchOnServer": true,
+        "mergeOperation": "merge"
+      }
+    }
+  },
+  "cc": {
+    "id": "cc",
+    "name": "Credit Card",
+    "entities": {}
+  }
+}
