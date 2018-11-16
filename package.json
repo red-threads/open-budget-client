@@ -38,6 +38,7 @@
   },
   "homepage": "https://github.com/red-threads/open-budget-client#readme",
   "dependencies": {
+    "@babel/preset-flow": "^7.0.0",
     "@red-threads/open-budget-api": "^0.5.2",
     "auth0-js": "^9.8.1",
     "babel-plugin-inline-dotenv": "^1.1.2",
@@ -59,9 +60,12 @@
     "react-jsonschema-form": "^1.0.5",
     "react-s-alert": "^1.4.1",
     "rollbar": "^2.5.0",
+    "shortid": "^2.2.14",
     "timm": "^1.6.1"
   },
   "devDependencies": {
+    "flow-bin": "^0.85.0",
+    "flow-typed": "^2.5.1",
     "jest": "^23.6.0",
     "now": "^11.4.6",
     "standard": "^12.0.1",
