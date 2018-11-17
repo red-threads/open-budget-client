@@ -15,6 +15,7 @@
     "lint": "standard --fix",
     "postrelease": "run-p push-tags deploy",
     "prerelease": "npm run lint",
+    "prestart": "next build",
     "publish": "npm publish --access=public",
     "push-tags": "git push --follow-tags origin master",
     "release": "standard-version",
