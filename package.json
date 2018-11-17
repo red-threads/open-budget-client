@@ -9,7 +9,7 @@
   },
   "scripts": {
     "build": "next build",
-    "deploy": "now --public && now alias && now rm @red-threads/open-budget-client -sy",
+    "deploy": "git push dokku master",
     "dev": "DEBUG=ob:* node --inspect=9230 server.js",
     "jest": "NODE_ENV=test jest",
     "lint": "standard --fix",
@@ -18,7 +18,7 @@
     "publish": "npm publish --access=public",
     "push-tags": "git push --follow-tags origin master",
     "release": "standard-version",
-    "start": "NODE_ENV=production node server.js",
+    "start": "node server.js",
     "test": "run-p lint jest"
   },
   "repository": {
@@ -67,20 +67,8 @@
     "flow-bin": "^0.85.0",
     "flow-typed": "^2.5.1",
     "jest": "^23.6.0",
-    "now": "^11.4.6",
     "standard": "^12.0.1",
     "standard-version": "^4.4.0"
-  },
-  "now": {
-    "alias": "open-budget",
-    "env": {
-      "API_URL": "@api-url",
-      "AUTH0_CLIENT_ID": "@auth0-client-id",
-      "JWT_AUDIENCE": "@jwt-audience",
-      "JWT_ISSUER": "@jwt-issuer",
-      "NODE_ENV": "production",
-      "ROLLBAR_TOKEN": "@rollbar-token"
-    }
   },
   "standard": {
     "ignore": [
